@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import example.com.fielthyapps.R;
 
-public class DietSehatActivity extends AppCompatActivity
+public class DietSehatActivity extends AppCompatActivity {
 
     private ImageView iV_kembali;
 
