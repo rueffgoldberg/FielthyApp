@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "991447274305",
+    "project_id": "fielthyapps",
+    "storage_bucket": "fielthyapps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991447274305:android:2d1b934b0c1887759907c0",
+        "android_client_info": {
+          "package_name": "example.com.fielthyapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991447274305-1iv65s0ij7965p35g4pckr8m2kg1901m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "example.com.fielthyapps",
+            "certificate_hash": "84f2fa7af9ecbc98319c6f3a2b52ae855a2bf529"
+          }
+        },
+        {
+          "client_id": "991447274305-8g8l4tb7q5fstlfcrtdhj0tlqcrs67gf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "example.com.fielthyapps",
+            "certificate_hash": "82fd8b58480f40a36f1af8ad60f3f38ef95ce6b6"
+          }
+        },
+        {
+          "client_id": "991447274305-g7qno39plrvshvfjs09ak2ucvl70f1ue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvoXEO7UnD2-czzZx7BYG_-ms-lp4ZRr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991447274305-g7qno39plrvshvfjs09ak2ucvl70f1ue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

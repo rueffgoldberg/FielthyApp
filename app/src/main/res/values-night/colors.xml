@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Overrides untuk Mode Gelap (Sage Dark Theme) -->
+    <color name="app_background">#121E1C</color> <!-- Latar belakang luar gelap -->
+    <color name="sage_green_light">#121E1C</color> <!-- Latar belakang luar gelap -->
+    <color name="header_bg">#30655F</color> <!-- Hijau gelap agar tetap ada elemen hijaunya -->
+    <color name="always_black">#121E1C</color> <!-- Selalu gelap/hitam terlepas dari tema -->
+    <color name="sage_green_dark">#A0D7D3</color> <!-- Judul kategori terang/sage soft -->
+    <color name="card_background">#1C2B29</color> <!-- Latar belakang kartu menu gelap -->
+    <color name="text_color_primary">#E6F0EF</color> <!-- Label menu warna abu terang -->
+    <color name="divider_grey">#253533</color> <!-- Pembatas garis gelap -->
+    <color name="text_grey">#FFFFFF</color> <!-- Icon bawah tidak aktif warna putih -->
+
+    <!-- Override Warna Global untuk merubah seluruh halaman secara otomatis -->
+    <color name="white">#121E1C</color> <!-- Semua background putih di aplikasi berganti menjadi gelap! -->
+    <color name="black">#E6F0EF</color> <!-- Semua text hitam di aplikasi berganti menjadi terang! -->
+    <color name="background">#678583</color>
+    <color name="grey">#D4D2D2</color>
+    <color name="blue2">#5F706E</color>
+    <color name="dark_blue">#3FB0A3</color>
+</resources>

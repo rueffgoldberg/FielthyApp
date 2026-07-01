@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Feature.Nutrition.HasilNutritionActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="410dp"
+        android:layout_height="120dp"
+        android:background="#F3F3F3"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:text="Kategori"
+                android:textColor="#2BA978"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nutrition"
+            android:textColor="#2BA978"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="43dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_menu_done" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="24dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="Nutrition"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="8sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#2BA978" />
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="43dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_menu_done"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="Hasil\nPemeriksaan"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="8sp" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tV_pagi"
+        android:layout_width="308dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/bg_input_text"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:text="Selamat makan pagi Anda memenuhi gizi seimbang"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
+
+    <TextView
+        android:id="@+id/tV_siang"
+        android:layout_width="308dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/bg_input_text"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:text="Selamat makan pagi Anda memenuhi gizi seimbang"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_pagi" />
+
+    <TextView
+        android:id="@+id/tV_malam"
+        android:layout_width="308dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/bg_input_text"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:text="Selamat makan pagi Anda memenuhi gizi seimbang"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tV_siang" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_back_nutrition"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/btn_submit"
+        android:text="Kembali ke Nutrition Home"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LL_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

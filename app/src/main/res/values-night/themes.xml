@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FielthyApps" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/tab</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/dark_blue</item>
+        <item name="colorSecondary">@color/tab</item>
+        <item name="colorSecondaryContainer">@color/dark_blue</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

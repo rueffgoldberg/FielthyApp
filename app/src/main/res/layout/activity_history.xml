@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context=".Feature.History.HistoryActivity">
+
+    <!-- Title: Riwayat -->
+    <TextView
+        android:id="@+id/tv_title_riwayat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:paddingTop="5dp"
+        android:fontFamily="@font/poppins_extrabold"
+        android:text="Riwayat"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Search Bar -->
+    <LinearLayout
+        android:id="@+id/ll_search_bar"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="38dp"
+        android:background="@drawable/bg_search_teal"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_riwayat">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_search_grey" />
+
+        <EditText
+            android:id="@+id/et_search_history"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:fontFamily="@font/poppins_reg"
+            android:hint="Cari riwayat pemeriksaan"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Filter Chips -->
+    <HorizontalScrollView
+        android:id="@+id/hsv_filter_chips"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_search_bar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="38dp">
+
+            <TextView
+                android:id="@+id/chip_semua"
+                android:layout_width="78dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_selected"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Semua"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_medcheck"
+                android:layout_width="82dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Med Check"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_physical"
+                android:layout_width="88dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Physical Act"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_smoker"
+                android:layout_width="92dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Smoker Cess"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_nutrition"
+                android:layout_width="82dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Nutrition"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_stress"
+                android:layout_width="96dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Stress Mngmnt"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/chip_rest"
+                android:layout_width="88dp"
+                android:layout_height="24dp"
+                android:background="@drawable/bg_chip_normal"
+                android:fontFamily="@font/poppins_reg"
+                android:gravity="center"
+                android:text="Rest Pattern"
+                android:textColor="@color/always_black"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Timeline RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_history_timeline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomnavigate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hsv_filter_chips" />
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavigate"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_background"
+        android:elevation="4dp"
+        app:itemIconTint="@drawable/bg_selector2"
+        app:itemRippleColor="@android:color/transparent"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

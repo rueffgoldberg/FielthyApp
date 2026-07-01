@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Asupan Air Hari Ini"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_x"
+            app:tint="@color/black" />
+
+    </RelativeLayout>
+
+    <!-- Icon -->
+    <FrameLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/circle_tab">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_darah"
+            app:tint="@color/white"/>
+    </FrameLayout>
+
+    <!-- Jumlah -->
+    <TextView
+        android:id="@+id/tV_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="5 / 8"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="34sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Gelas"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_med"
+        android:textSize="16sp" />
+
+    <!-- Gelas Dinamis -->
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/layoutCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:flexWrap="wrap"
+        app:justifyContent="center"/>
+
+    <!-- Progress -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tV_percent"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="62%"
+            android:textColor="@color/tab"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="15sp" />
+
+        <ProgressBar
+            android:id="@+id/progressWater"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="6dp"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="62"
+            android:progressTint="@color/tab" />
+
+    </LinearLayout>
+
+    <!-- Tombol Tambah -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTambah"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_green_new"
+        android:text="+ Tambah 1 Gelas"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnKurang"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_btn_outline"
+        android:text="- Kurangi 1 Gelas"
+        android:textColor="@color/tab"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_bold"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Target Harian"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnMinusTarget"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/circle_tab"
+            android:src="@drawable/ic_minus"
+            app:tint="@color/white"/>
+
+        <TextView
+            android:id="@+id/tV_target"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="8"
+            android:textSize="28sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"/>
+
+        <ImageButton
+            android:id="@+id/btnPlusTarget"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/circle_tab"
+            android:src="@drawable/ic_plus"
+            app:tint="@color/white"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="Minimal 4 gelas • Maksimal 12 gelas"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_reg"/>
+
+</LinearLayout>
