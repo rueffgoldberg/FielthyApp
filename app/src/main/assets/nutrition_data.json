@@ -1,0 +1,387 @@
+{
+  "Ayam Bakar": {
+    "kalori_kcal": 167,
+    "protein_g": 25.01,
+    "karbohidrat_g": 5.0,
+    "lemak_g": 6.63,
+    "sumber": "FatSecret Indonesia"
+  },
+  "Es cendol": {
+    "kalori_kcal": 280,
+    "protein_g": 2.0,
+    "karbohidrat_g": 49.0,
+    "lemak_g": 9.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "Sate padang": {
+    "kalori_kcal": 161,
+    "protein_g": 18.01,
+    "karbohidrat_g": 6.79,
+    "lemak_g": 6.63,
+    "sumber": "FatSecret Indonesia"
+  },
+  "ayam geprek": {
+    "kalori_kcal": 265,
+    "protein_g": 18.0,
+    "karbohidrat_g": 15.0,
+    "lemak_g": 15.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "ayam goreng tepung": {
+    "kalori_kcal": 298,
+    "protein_g": 34.2,
+    "karbohidrat_g": 0.1,
+    "lemak_g": 16.8,
+    "sumber": "TKPI (Ayam goreng kentucky, dada)"
+  },
+  "ayam gulai": {
+    "kalori_kcal": 203,
+    "protein_g": 16.0,
+    "karbohidrat_g": 4.4,
+    "lemak_g": 13.5,
+    "sumber": "TKPI (Kalio ayam)"
+  },
+  "ayam pop": {
+    "kalori_kcal": 170,
+    "protein_g": 19.0,
+    "karbohidrat_g": 5.0,
+    "lemak_g": 9.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bakso": {
+    "kalori_kcal": 76,
+    "protein_g": 6.0,
+    "karbohidrat_g": 3.0,
+    "lemak_g": 1.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bakwan": {
+    "kalori_kcal": 137,
+    "protein_g": 3.1,
+    "karbohidrat_g": 14.8,
+    "lemak_g": 7.7,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bihun goreng": {
+    "kalori_kcal": 192,
+    "protein_g": 3.8,
+    "karbohidrat_g": 31.7,
+    "lemak_g": 5.7,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bubur ayam": {
+    "kalori_kcal": 372,
+    "protein_g": 27.56,
+    "karbohidrat_g": 36.12,
+    "lemak_g": 12.39,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bubur kacang hijau": {
+    "kalori_kcal": 108,
+    "protein_g": 3.54,
+    "karbohidrat_g": 17.76,
+    "lemak_g": 3.06,
+    "sumber": "FatSecret Indonesia"
+  },
+  "bubur sum sum": {
+    "kalori_kcal": 250,
+    "protein_g": 2.0,
+    "karbohidrat_g": 45.0,
+    "lemak_g": 6.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "cah kangkung": {
+    "kalori_kcal": 95,
+    "protein_g": 3.4,
+    "karbohidrat_g": 8.5,
+    "lemak_g": 6.1,
+    "sumber": "FatSecret Indonesia"
+  },
+  "capcay": {
+    "kalori_kcal": 97,
+    "protein_g": 5.8,
+    "karbohidrat_g": 4.2,
+    "lemak_g": 6.3,
+    "sumber": "TKPI (Cap cai, sayur)"
+  },
+  "cimol": {
+    "kalori_kcal": 254,
+    "protein_g": 1.0,
+    "karbohidrat_g": 45.0,
+    "lemak_g": 8.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "cireng": {
+    "kalori_kcal": 70,
+    "protein_g": 0.94,
+    "karbohidrat_g": 6.35,
+    "lemak_g": 4.53,
+    "sumber": "FatSecret Indonesia"
+  },
+  "cumi goreng tepung": {
+    "kalori_kcal": 234,
+    "protein_g": 15.0,
+    "karbohidrat_g": 17.0,
+    "lemak_g": 11.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "dendeng balado": {
+    "kalori_kcal": 123,
+    "protein_g": 9.96,
+    "karbohidrat_g": 3.3,
+    "lemak_g": 7.68,
+    "sumber": "FatSecret Indonesia"
+  },
+  "donat": {
+    "kalori_kcal": 250,
+    "protein_g": 2.7,
+    "karbohidrat_g": 34.44,
+    "lemak_g": 11.94,
+    "sumber": "FatSecret Indonesia"
+  },
+  "ikan gurami goreng": {
+    "kalori_kcal": 550,
+    "protein_g": 54.25,
+    "karbohidrat_g": 0.0,
+    "lemak_g": 35.99,
+    "sumber": "FatSecret Indonesia"
+  },
+  "jagung bakar": {
+    "kalori_kcal": 90,
+    "protein_g": 3.0,
+    "karbohidrat_g": 19.0,
+    "lemak_g": 1.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "jamur krispy": {
+    "kalori_kcal": 220,
+    "protein_g": 4.0,
+    "karbohidrat_g": 25.0,
+    "lemak_g": 12.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "jasuke": {
+    "kalori_kcal": 160,
+    "protein_g": 4.5,
+    "karbohidrat_g": 22.0,
+    "lemak_g": 6.5,
+    "sumber": "FatSecret Indonesia"
+  },
+  "kentang balado": {
+    "kalori_kcal": 185,
+    "protein_g": 2.12,
+    "karbohidrat_g": 21.1,
+    "lemak_g": 11.12,
+    "sumber": "FatSecret Indonesia"
+  },
+  "kentang goreng": {
+    "kalori_kcal": 274,
+    "protein_g": 3.48,
+    "karbohidrat_g": 35.66,
+    "lemak_g": 14.06,
+    "sumber": "FatSecret Indonesia"
+  },
+  "kerak telor": {
+    "kalori_kcal": 258,
+    "protein_g": 11.0,
+    "karbohidrat_g": 26.0,
+    "lemak_g": 12.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "ketoprak": {
+    "kalori_kcal": 153,
+    "protein_g": 7.9,
+    "karbohidrat_g": 13.0,
+    "lemak_g": 7.7,
+    "sumber": "TKPI (Ketoprak)"
+  },
+  "kolak pisang": {
+    "kalori_kcal": 163,
+    "protein_g": 1.2,
+    "karbohidrat_g": 36.3,
+    "lemak_g": 2.1,
+    "sumber": "FatSecret Indonesia"
+  },
+  "kue cubit": {
+    "kalori_kcal": 70,
+    "protein_g": 1.99,
+    "karbohidrat_g": 13.01,
+    "lemak_g": 1.11,
+    "sumber": "FatSecret Indonesia"
+  },
+  "kwetiau": {
+    "kalori_kcal": 292,
+    "protein_g": 8.0,
+    "karbohidrat_g": 42.0,
+    "lemak_g": 10.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "lele goreng": {
+    "kalori_kcal": 260,
+    "protein_g": 16.0,
+    "karbohidrat_g": 5.0,
+    "lemak_g": 18.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "martabak": {
+    "kalori_kcal": 278,
+    "protein_g": 5.1,
+    "karbohidrat_g": 45.0,
+    "lemak_g": 8.6,
+    "sumber": "TKPI (Martabak mesir)"
+  },
+  "mie ayam": {
+    "kalori_kcal": 102,
+    "protein_g": 6.2,
+    "karbohidrat_g": 10.5,
+    "lemak_g": 3.9,
+    "sumber": "TKPI (Mie ayam)"
+  },
+  "mie goreng": {
+    "kalori_kcal": 168,
+    "protein_g": 4.47,
+    "karbohidrat_g": 20.5,
+    "lemak_g": 7.89,
+    "sumber": "FatSecret Indonesia"
+  },
+  "molen": {
+    "kalori_kcal": 110,
+    "protein_g": 1.5,
+    "karbohidrat_g": 16.0,
+    "lemak_g": 5.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "nasi goreng": {
+    "kalori_kcal": 230,
+    "protein_g": 7.0,
+    "karbohidrat_g": 22.0,
+    "lemak_g": 13.0,
+    "sumber": "FatSecret Indonesia"
+  },
+  "pempek": {
+    "kalori_kcal": 152,
+    "protein_g": 4.5,
+    "karbohidrat_g": 28.2,
+    "lemak_g": 2.3,
+    "sumber": "TKPI (Pempek kapal selam)"
+  },
+  "pergedel": {
+    "kalori_kcal": 21.0,
+    "protein_g": 0.46,
+    "karbohidrat_g": 2.48,
+    "lemak_g": 1.12,
+    "sumber": "FatSecret Indonesia"
+  },
+  "pisang goreng": {
+    "kalori_kcal": 252,
+    "protein_g": 1.47,
+    "karbohidrat_g": 36.07,
+    "lemak_g": 13.27,
+    "sumber": "FatSecret Indonesia"
+  },
+  "rendang": {
+    "kalori_kcal": 193,
+    "protein_g": 22.6,
+    "karbohidrat_g": 7.8,
+    "lemak_g": 7.9,
+    "sumber": "TKPI (Rendang sapi)"
+  },
+  "risoles": {
+    "kalori_kcal": 160,
+    "protein_g": 10.54,
+    "karbohidrat_g": 14.43,
+    "lemak_g": 6.25,
+    "sumber": "FatSecret Indonesia"
+  },
+  "roti tawar": {
+    "kalori_kcal": 248,
+    "protein_g": 8.0,
+    "karbohidrat_g": 50.0,
+    "lemak_g": 1.2,
+    "sumber": "TKPI (Roti putih)"
+  },
+  "sayur asam": {
+    "kalori_kcal": 29,
+    "protein_g": 0.7,
+    "karbohidrat_g": 5.0,
+    "lemak_g": 0.6,
+    "sumber": "TKPI (Sayur asem)"
+  },
+  "seblak": {
+    "kalori_kcal": 315,
+    "protein_g": 9.77,
+    "karbohidrat_g": 37.38,
+    "lemak_g": 15.97,
+    "sumber": "FatSecret Indonesia"
+  },
+  "siomay": {
+    "kalori_kcal": 74,
+    "protein_g": 4.57,
+    "karbohidrat_g": 6.16,
+    "lemak_g": 3.71,
+    "sumber": "FatSecret Indonesia"
+  },
+  "telor balado": {
+    "kalori_kcal": 71,
+    "protein_g": 6.0,
+    "karbohidrat_g": 1.22,
+    "lemak_g": 5.75,
+    "sumber": "FatSecret Indonesia"
+  },
+  "telur dadar": {
+    "kalori_kcal": 93,
+    "protein_g": 6.48,
+    "karbohidrat_g": 0.42,
+    "lemak_g": 7.33,
+    "sumber": "FatSecret Indonesia"
+  },
+  "telur gulung": {
+    "kalori_kcal": 100,
+    "protein_g": 2.6,
+    "karbohidrat_g": 9.73,
+    "lemak_g": 5.8,
+    "sumber": "FatSecret Indonesia"
+  },
+  "telur matasapi": {
+    "kalori_kcal": 92,
+    "protein_g": 6.27,
+    "karbohidrat_g": 0.4,
+    "lemak_g": 7.04,
+    "sumber": "FatSecret Indonesia"
+  },
+  "tempe goreng": {
+    "kalori_kcal": 336,
+    "protein_g": 20.0,
+    "karbohidrat_g": 7.8,
+    "lemak_g": 28.0,
+    "sumber": "TKPI (Tempe pasar goreng)"
+  },
+  "tempe mendoan": {
+    "kalori_kcal": 200,
+    "protein_g": 11.18,
+    "karbohidrat_g": 12.69,
+    "lemak_g": 12.78,
+    "sumber": "FatSecret Indonesia"
+  },
+  "tempe orek": {
+    "kalori_kcal": 210,
+    "protein_g": 15.74,
+    "karbohidrat_g": 18.72,
+    "lemak_g": 9.84,
+    "sumber": "FatSecret Indonesia"
+  },
+  "terong": {
+    "kalori_kcal": 28,
+    "protein_g": 1.1,
+    "karbohidrat_g": 5.5,
+    "lemak_g": 0.2,
+    "sumber": "TKPI (Terong segar)"
+  },
+  "udang balado": {
+    "kalori_kcal": 154,
+    "protein_g": 16.08,
+    "karbohidrat_g": 6.05,
+    "lemak_g": 7.07,
+    "sumber": "FatSecret Indonesia"
+  }
+}

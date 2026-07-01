@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Mengambil warna hijau logo dari @color/tab -->
+    <solid android:color="@color/tab" />
+    
+    <!-- Memberikan efek lengkungan membulat di sisi -->
+    <corners android:radius="12dp" />
+</shape>

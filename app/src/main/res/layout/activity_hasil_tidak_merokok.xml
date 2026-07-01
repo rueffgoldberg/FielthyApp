@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Feature.Smoker.HasilTidakMerokokActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/LinearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Header atas -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <ImageView
+                android:id="@+id/iV_kembali"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="6dp"
+                android:src="@drawable/ic_backward"
+                app:tint="@color/black" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Kategori"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Smoker Cessation"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!--Progress-->
+        <LinearLayout
+            android:id="@+id/progress_medcheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:gravity="top|center_horizontal"
+            android:orientation="horizontal">
+
+            <!-- Step 1 -->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/circle_active" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:gravity="center"
+                    android:text="Smoker \nCessation"
+                    android:textColor="#222222"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- Garis -->
+            <View
+                android:layout_width="96dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="13dp"
+                android:background="#2CB08F" />
+
+            <!-- Step 2 -->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/circle_active" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:gravity="center"
+                    android:text="Hasil \nPemeriksaan"
+                    android:textColor="#222222"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintTop_toBottomOf="@id/LinearLayout11"
+        app:layout_constraintBottom_toTopOf="@id/btn_selesai"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="32dp">
+
+            <!--Icon-->
+            <LinearLayout
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/circle_out"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ic_check"
+                    app:tint="@color/tab"/>
+            </LinearLayout>
+
+            <!--Title-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Terima kasih!"
+                android:textColor="@color/tab"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Anda bukan perokok"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
+
+            <!-- CARD MOTIVASI -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_med_card_outline"
+                android:elevation="3dp"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <!-- ICON -->
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/circle_out"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_tameng_kesehatan"
+                        app:tint="#2CB8B0"/>
+                </LinearLayout>
+
+                <!-- TEXT -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Pilihan yang hebat!"
+                        android:textColor="#000000"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins_reg"
+                        android:lineSpacingExtra="2dp"
+                        android:justificationMode="inter_word"
+                        android:text="Mempertahankan gaya hidup bebas rokok adalah langkah terbaik untuk kesehatan tubuh Anda."
+                        android:textColor="#333333"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- CARD MANFAAT -->
+            <LinearLayout
+                android:id="@+id/LL_manfaat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_med_input"
+                android:elevation="3dp"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <!-- TITLE -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Manfaat yang sudah Anda dapatkan"
+
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+
+                <!-- ITEM 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/circle_out"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Paru-paru lebih sehat"
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_reg"
+                            android:text="Risiko penyakit pernapasan lebih rendah"
+                            android:textColor="#333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- ITEM 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/circle_out"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Risiko penyakit lebih rendah"
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_reg"
+                            android:text="Jantung, stroke, dan kanker lebih terhindar"
+                            android:textColor="#333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- ITEM 3 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/circle_out"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Kualitas hidup lebih baik"
+                            android:textColor="#000000"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_reg"
+                            android:text="Energi lebih banyak dan hidup lebih optimal"
+                            android:textColor="#333333"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_selesai"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_btn_green_new"
+        android:text="Selesai"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

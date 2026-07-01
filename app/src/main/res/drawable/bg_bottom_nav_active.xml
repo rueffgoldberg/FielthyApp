@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Saat menu aktif / dipilih -->
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:gravity="center">
+                <shape android:shape="oval">
+                    <!-- Gunakan warna teal muda untuk lingkaran background -->
+                    <solid android:color="@color/blue2" />
+                    <!-- Ukuran lingkaran (bisa disesuaikan jika kurang besar) -->
+                    <size android:width="46dp" android:height="46dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    
+    <!-- Saat tidak aktif, transparan -->
+    <item android:drawable="@android:color/transparent" />
+</selector>

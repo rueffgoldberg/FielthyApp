@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_input_whiteblue">
+
+    <TextView
+        android:id="@+id/tvOption"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="12dp"
+        android:buttonTint="@color/tab"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="60dp"
+        android:text="Option"
+        android:fontFamily="@font/poppins_reg"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+</RelativeLayout>

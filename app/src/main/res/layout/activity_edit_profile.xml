@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".Auth.EditProfileActivity">
+
+    <!-- HEADER (Tetap di atas) -->
+    <View
+        android:id="@+id/decor_circle_left"
+        android:layout_width="116dp"
+        android:layout_height="116dp"
+        android:layout_marginStart="-58dp"
+        android:layout_marginTop="-52dp"
+        android:background="@drawable/bg_decor_circle_soft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/decor_blob_right"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="-52dp"
+        android:layout_marginEnd="-48dp"
+        android:background="@drawable/bg_decor_circle_soft"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iV_kembali"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="14dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Kembali"
+        android:padding="12dp"
+        android:src="@drawable/ic_backward"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#12313A" />
+
+    <TextView
+        android:id="@+id/tv_edit_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Edit Profile"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iV_kembali"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iV_kembali" />
+
+    <!-- KONTEN SCROLLABLE (Untuk HP berlayar kecil) -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iV_kembali">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"> <!-- Padding bawah agar tombol tidak mepet navbar -->
+
+            <!-- AVATAR DAN SHADOW (Dikunci bersamaan agar tidak bergeser) -->
+            <View
+                android:id="@+id/avatar_shadow"
+                android:layout_width="174dp"
+                android:layout_height="76dp"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/bg_avatar_shadow"
+                app:layout_constraintEnd_toEndOf="@+id/profile_image"
+                app:layout_constraintStart_toStartOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/bg_avatar_placeholder"
+                app:civ_border_color="#E9F7F4"
+                app:civ_border_width="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iV_addImg"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="-2dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/circle_blue"
+                android:contentDescription="Ganti foto"
+                android:elevation="5dp"
+                android:padding="10dp"
+                android:src="@drawable/camera_white"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                app:layout_constraintEnd_toEndOf="@+id/profile_image"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_change_photo_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_med"
+                android:text="Tap untuk mengganti foto"
+                android:textColor="#8A9CA1"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+            <!-- FORM CONTAINER -->
+            <!-- Tinggi diubah dari 0dp menjadi wrap_content karena sudah ada di dalam ScrollView -->
+            <LinearLayout
+                android:id="@+id/form_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_change_photo_hint">
+
+                <EditText
+                    android:id="@+id/eT_name_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:background="@drawable/bg_item_white"
+                    android:drawableStart="@drawable/ic_person"
+                    android:drawablePadding="16dp"
+                    android:elevation="2dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:hint="Nama Lengkap"
+                    android:inputType="textPersonName"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/eT_date_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_item_white"
+                    android:clickable="true"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:drawablePadding="16dp"
+                    android:elevation="2dp"
+                    android:focusable="false"
+                    android:fontFamily="@font/poppins_med"
+                    android:hint="Tanggal Lahir"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_gender_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Jenis Kelamin"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rG_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="74dp"
+                    android:layout_marginTop="9dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rB_laki"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_gender_option"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableStart="@drawable/ic_male"
+                        android:drawableEnd="@drawable/ic_gender_check_selector"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="12dp"
+                        android:text="Laki-Laki"
+                        android:textColor="#17343D"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/rB_wanita"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_gender_option"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_female"
+                        android:drawableEnd="@drawable/ic_gender_check_selector"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center_vertical"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="12dp"
+                        android:text="Perempuan"
+                        android:textColor="#17343D"
+                        android:textSize="14sp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:id="@+id/info_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_card_blue_soft"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_info"
+                        app:tint="#16B59F" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_med"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Pastikan data yang kamu masukkan sudah benar sebelum menyimpan perubahan."
+                        android:textColor="@color/always_black"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_edit_profile_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/bg_btn_green_new"
+                    android:drawablePadding="10dp"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="Simpan Perubahan"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

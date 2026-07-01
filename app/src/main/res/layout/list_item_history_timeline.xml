@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_history_timeline_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_history_item_teal"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="6dp">
+
+    <!-- Category Icon -->
+    <ImageView
+        android:id="@+id/iv_category_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_medcheck"
+        app:tint="#757575" />
+
+    <!-- Category Name -->
+    <TextView
+        android:id="@+id/tv_category_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_med"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:textColor="#757575"
+        android:textSize="11.5sp"
+        tools:text="Med Check" />
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/tv_history_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/poppins_thin"
+        android:includeFontPadding="false"
+        android:textColor="@color/always_black"
+        android:textSize="11sp"
+        tools:text="10:00 AM" />
+
+    <!-- Chevron ">" in circle -->
+    <FrameLayout
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:background="@drawable/bg_chevron_circle">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="›"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginBottom="1dp" />
+
+    </FrameLayout>
+
+</LinearLayout>

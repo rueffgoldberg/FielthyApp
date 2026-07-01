@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Feature.Stress.StressActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/LinearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!--Header Atas-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/iV_kembali"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="6dp"
+                android:src="@drawable/ic_backward"
+                app:tint="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Kategori"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Stress Management"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+        <!--Progress-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:gravity="top|center_horizontal"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/circle_active"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:gravity="center"
+                    android:text="Stress \nManagement"
+                    android:textColor="@color/grey"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <!--Garis-->
+            <View
+                android:layout_width="55dp"
+                android:layout_height="1.5dp"
+                android:layout_marginTop="13dp"
+                android:background="@color/blue"/>
+
+            <!--Step 2-->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/circle_out"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:gravity="center"
+                    android:text="Form \nPemeriksaan"
+                    android:textColor="@color/grey"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <!--Garis 2-->
+            <View
+                android:layout_width="55dp"
+                android:layout_height="1.5dp"
+                android:layout_marginTop="13dp"
+                android:background="@color/blue"/>
+
+            <!--Step 3-->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/circle_out"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/poppins_med"
+                    android:gravity="center"
+                    android:text="Hasil \nPemeriksaan"
+                    android:textColor="@color/grey"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="17dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@id/LinearLayout11"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="24dp"
+            android:gravity="center_horizontal">
+
+            <!--Icon-->
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_stress"
+                android:background="@drawable/circle_dark"
+                android:padding="2dp"
+                app:tint="@color/grey"/>
+
+            <!--Title-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Kesehatan Mental Anda"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="25sp"/>
+
+            <!--Description-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="Pantau stres, kecemasan, dan kesehatan mental untuk hidup yang lebih tenang dan seimbang."
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_reg"
+                android:textSize="14sp"/>
+
+            <!--CARD STRESS-->
+            <LinearLayout
+                android:id="@+id/LL_section_one"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_white_stroke_blue"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <!-- BULAT -->
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/circle_dark"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_stress"
+                    app:tint="#2C3633"/>
+
+                <!-- TEXT -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <!-- TITLE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Tes Stress"
+                        android:textColor="@color/always_black"
+                        android:textSize="18sp" />
+
+                    <!-- DESC -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_reg"
+                        android:text="Kenali tingkat stres yang Anda alami dan pahami faktor pemicunya."
+                        android:textColor="#757575"
+                        android:justificationMode="inter_word"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--CARD KECEMASAN-->
+
+            <!--CARD DEPRESI-->
+            <LinearLayout
+                android:id="@+id/LL_section_two"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_white_stroke_blue"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <!-- BULAT -->
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/circle_dark"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_cemas"
+                    app:tint="#2C3633" />
+
+                <!-- TEXT -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <!-- TITLE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Tes Kecemasan"
+                        android:textColor="@color/always_black"
+                        android:textSize="18sp" />
+
+                    <!-- DESC -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_reg"
+                        android:justificationMode="inter_word"
+                        android:text="Pahami tingkat kecemasan Anda dan temukan metode untuk mengelolanya."
+                        android:textColor="#757575"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LL_section_three"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_white_stroke_blue"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+
+                <!-- BULAT -->
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/circle_dark"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_depression"
+                    app:tint="#2C3633"/>
+
+                <!-- TEXT -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <!-- TITLE -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Tes Depresi"
+                        android:textColor="@color/always_black"
+                        android:textSize="18sp" />
+
+                    <!-- DESC -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/poppins_reg"
+                        android:justificationMode="inter_word"
+                        android:text="Evaluasi kondisi emosional Anda dan temukan langkah tepat untuk merasa lebih baik."
+                        android:textColor="#757575"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
