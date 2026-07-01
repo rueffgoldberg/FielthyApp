@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">FielthyApps</string>
+
+    <!--    Halaman Lupa Password -->
+    <string name="lupa_pass">Lupa Password Anda?</string>
+    <string name="deskripsi_lupa_pass">Masukan email dan ketuk lanjutkan untuk
+        membantu anda masuk kedalam aplikasi
+        posbindu. Kami akan mengirimkan pesan
+        konfirmasi ke alamat email anda untuk
+        merubah password anda.</string>
+    <!--Akhir Halaman Lupa Password-->
+
+    <string-array name="porsi">
+        <item>1/2 Piring</item>
+        <item>1/3 Piring</item>
+        <item>1/4 Piring</item>
+        <item>1/6 Piring</item>
+        <item>1 Piring</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

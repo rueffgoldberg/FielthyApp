@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Override theme for Android 12 (API 31) and above to hide the default splash screen -->
+    <style name="Theme.FielthyApps" parent="Base.Theme.FielthyApps">
+        <!-- Make the default splash screen background white to match the app -->
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+        <!-- Use an empty/transparent icon to hide the launcher icon -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/empty_splash_icon</item>
+    </style>
+</resources>

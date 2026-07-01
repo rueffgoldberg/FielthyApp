@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Auth.RegistrasiActivity"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="Selamat Datang!"
+                android:textColor="@color/black"
+                android:textSize="35sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="40dp"
+                android:text="Mulai perjalanan sehatmu"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <!--Input Data Diri-->
+            <!--Nama Lengkap-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="40dp"
+                android:text="Nama Lengkap"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/eT_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_input_whiteblue"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawableTint="@color/grey"
+                android:drawablePadding="15dp"
+                android:hint="Masukkan Nama Lengkap Anda"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/poppins_reg"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="13sp" />
+
+            <!--Email-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/eT_email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_input_whiteblue"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawableTint="@color/grey"
+                android:drawablePadding="15dp"
+                android:hint="Masukkan Email Anda"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/poppins_reg"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="13sp" />
+
+
+            <!--No.HP-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="No. HP"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/eT_phone"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_input_whiteblue"
+                android:drawableTint="@color/grey"
+                android:drawableLeft="@drawable/ic_no_telp"
+                android:drawablePadding="15dp"
+                android:hint="Masukkan No. HP Anda"
+                android:fontFamily="@font/poppins_reg"
+                android:inputType="phone"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="13sp" />
+
+            <!--Tanggal Lahir-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="Tanggal Lahir"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/eT_date"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_input_whiteblue"
+                android:drawableTint="@color/grey"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:drawablePadding="15dp"
+                android:hint="Pilih tanggal lahir"
+                android:fontFamily="@font/poppins_reg"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+                android:textSize="13sp" />
+
+            <!--Jenis Kelamin-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/btn_gender_male"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_input_whiteblue"
+                    android:gravity="center"
+                    android:paddingEnd="4dp"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iv_gender_male"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_male" />
+
+                    <TextView
+                        android:id="@+id/layout_laki"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:text="Laki-laki"
+                        android:textColor="@color/grey"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"/>
+                </LinearLayout>
+
+                <!-- Perempuan -->
+                <LinearLayout
+                    android:id="@+id/btn_gender_female"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_input_whiteblue"
+                    android:gravity="center"
+                    android:paddingEnd="8dp"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iv_gender_female"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_female"/>
+
+                    <TextView
+                        android:id="@+id/layout_perempuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:text="Perempuan"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Kata Sandi-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="@font/poppins_med"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="40dp"
+                android:text="Kata Sandi"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_input_whiteblue">
+
+                <ImageView
+                    android:id="@+id/iv_password_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/ic_password"
+                    app:tint="@color/grey" />
+
+                <EditText
+                    android:id="@+id/eT_password_registrasi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/iv_password_icon"
+                    android:layout_toStartOf="@id/iv_toggle_password"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/poppins_reg"
+                    android:hint="Masukkan Kata Sandi"
+                    android:inputType="textPassword"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/iv_toggle_password"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_eye_off"
+                    app:tint="@color/black"/>
+
+            </RelativeLayout>
+
+            <!--Regis button-->
+            <Button
+                android:id="@+id/btn_registrasi"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bg_btn_green_new"
+                android:text="Daftar"
+                android:fontFamily="@font/poppins_bold"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <!--Divider-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="atau lanjutkan dengan"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="none"
+                    android:fontFamily="@font/poppins_reg"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/black"/>
+
+            </LinearLayout>
+
+            <!--Button Google-->
+            <LinearLayout
+                android:id="@+id/btn_google_registrasi"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="0dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_input_whiteblue"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_google" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="Google"
+                    android:textColor="@color/grey"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/poppins_reg" />
+            </LinearLayout>
+
+            <!-- No Account Register Link -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sudah punya akun? "
+                    android:fontFamily="@font/poppins_reg"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/tV_masuk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masuk"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/tab" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

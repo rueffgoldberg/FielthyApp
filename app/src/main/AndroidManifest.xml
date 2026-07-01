@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.health.READ_HEART_RATE" />
+    <uses-permission android:name="android.permission.health.WRITE_HEART_RATE" />
+    <uses-permission android:name="android.permission.health.READ_STEPS" />
+    <uses-permission android:name="android.permission.health.WRITE_STEPS" />
+    <uses-permission android:name="android.permission.health.READ_ACTIVE_CALORIES_BURNED" />
+
+    <queries>
+        <package android:name="com.google.android.apps.healthdata" />
+    </queries>
+
+    <application
+        android:name=".FieltyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FielthyApps"
+        tools:targetApi="31">
+        <activity
+            android:name=".Feature.Physical.PanduanBalkeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.Panduan6MWTActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.Panduan6MWT"
+            android:exported="false" />
+
+        <service
+            android:name=".Feature.Physical.TrackingService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <activity
+            android:name=".Feature.Smoker.KalkulatorMerokokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.HasilKalkulatorMerokokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.KalkultorMerokokActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".Service.DataLayerListenerService"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- listeners receive events that match the action and data filters -->
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+
+                <data
+                    android:host="*"
+                    android:pathPrefix="/heartrate"
+                    android:scheme="wear" />
+            </intent-filter>
+            <intent-filter>
+
+                <!-- additional listener for steps data -->
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+
+                <data
+                    android:host="*"
+                    android:pathPrefix="/steps"
+                    android:scheme="wear" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".Feature.Physical.HealthConnectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PermissionsRationaleActivity"
+            android:exported="false" />
+        <!--
+ For versions starting Android 14, create an activity alias to show the rationale
+             of Health Connect permissions once users click the privacy policy link.
+        -->
+        <activity-alias
+            android:name=".ViewPermissionUsageActivity"
+            android:exported="true"
+            android:permission="android.permission.START_VIEW_PERMISSION_USAGE"
+            android:targetActivity=".PermissionsRationaleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
+
+                <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity
+            android:name=".Feature.Nutrition.FoodResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.FoodRecognitionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.EditAuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Stress.HasilStressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.DietSehatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.MakananSehatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.HasilNutritionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.HasilTidakMerokokActivity"
+            android:exported="false" />
+
+        <service android:name=".Feature.RestPattern.StopwatchService" />
+        <service
+            android:name=".Feature.RestPattern.SleepDetectionService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_TYPE"
+                android:value="Sleep tracking and detection based on device movement to help users monitor their rest patterns continuously in the background." />
+        </service>
+
+        <receiver
+            android:name=".Feature.RestPattern.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".Feature.RestPattern.SleepConfirmationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FielthyApps.Transparent" />
+        <activity
+            android:name=".Feature.Physical.HasilTestBalkeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.RestPattern.HasilTestRestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.HasilTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.BalkeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.PhysicalTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.InformasiMenjauhiRokokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.TipsBerhentiMerokokActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.HasilSmokerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.TestSmokerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Stress.SectionTigaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Stress.SectionDuaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Stress.SectionSatuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Medcheck.HasilMedCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ComingsoonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Stress.StressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Smoker.SmokerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.RestPattern.RestPatternActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Physical.PhysicalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.HasilBMRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.BMRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Nutrition.NutritionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.Medcheck.MedCheckActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity
+            android:name=".Auth.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Feature.History.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.RegistrasiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- <service android:name=".Feature.RestPattern.StopwatchService" -->
+        <!-- android:foregroundServiceType="location" /> -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBxuOzkK34MSRb4t5sXNrY4DhwGjd4BGLo" />
+    </application>
+
+</manifest>

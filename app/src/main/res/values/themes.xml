@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FielthyApps" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/tab</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/blue</item>
+        <item name="colorSecondary">@color/tab</item>
+        <item name="colorSecondaryContainer">@color/blue2</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.FielthyApps" parent="Base.Theme.FielthyApps" />
+    <style name="Theme.FielthyApps.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="Theme.BottomNav" parent="Base.Theme.FielthyApps">
+        <!-- Menyembunyikan indicator pill bawaan Material3 -->
+        <item name="colorSecondaryContainer">@android:color/transparent</item>
+    </style>
+</resources>
