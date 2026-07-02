@@ -15,7 +15,7 @@
 
     <color name="header_bg">#AFE7E4</color>
     <color name="always_black">#121E1C</color>
-    <color name="always_white">#FFFFF0</color> <!-- Selalu gelap/hitam terlepas dari tema -->
+    <color name="always_white">#FFFFFF</color> <!-- Selalu gelap/hitam terlepas dari tema -->
 
     <!-- Redesain Pengaturan (Sage Green Theme) -->
     <color name="sage_green">#84B0AC</color>

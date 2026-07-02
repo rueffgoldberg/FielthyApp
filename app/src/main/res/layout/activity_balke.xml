@@ -293,7 +293,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/bg_med_icon_box"
+                        android:background="@drawable/bg_icon_box"
                         android:padding="6dp"
                         android:src="@drawable/ic_person"
                         app:tint="@color/black"/>
@@ -330,7 +330,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_med_input"
+                        android:background="@drawable/bg_blue_input"
                         android:hint="Umur"
                         android:fontFamily="@font/poppins_reg"
                         android:paddingStart="12dp"
@@ -342,11 +342,11 @@
                     <TextView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_reg"
                         android:gravity="center"
                         android:text="th"
-                        android:textColor="@color/grey"
-                        android:fontFamily="@font/poppins_reg"
-                        android:textSize="10sp"/>
+                        android:textColor="@color/always_black"
+                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <!--Input Jenis Kelamin-->
@@ -362,7 +362,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_med_input"
+                        android:background="@drawable/bg_blue_input"
                         android:hint="Jenis Kelamin"
                         android:fontFamily="@font/poppins_reg"
                         android:paddingStart="12dp"
@@ -376,7 +376,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text=""
-                        android:textColor="@color/grey"
+                        android:textColor="@color/always_black"
                         android:fontFamily="@font/poppins_reg"
                         android:textSize="10sp"/>
                 </LinearLayout>
@@ -394,7 +394,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_med_input"
+                        android:background="@drawable/bg_blue_input"
                         android:hint="Masukkan Berat Badan"
                         android:fontFamily="@font/poppins_reg"
                         android:paddingStart="12dp"
@@ -408,7 +408,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="kg"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/always_black"
                         android:fontFamily="@font/poppins_reg"
                         android:textSize="10sp"/>
                 </LinearLayout>
@@ -426,7 +426,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_med_input"
+                        android:background="@drawable/bg_blue_input"
                         android:hint="Masukkan Tinggi Badan"
                         android:fontFamily="@font/poppins_reg"
                         android:paddingStart="12dp"
@@ -440,7 +440,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="cm"
-                        android:textColor="@color/grey"
+                        android:textColor="@color/always_black"
                         android:fontFamily="@font/poppins_reg"
                         android:textSize="10sp"/>
                 </LinearLayout>
@@ -529,7 +529,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_reg"
                                 android:text="26/05/2026"
-                                android:textColor="@color/grey"
+                                android:textColor="@color/black"
                                 android:textSize="10sp"/>
                         </LinearLayout>
                     </LinearLayout>

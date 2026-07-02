@@ -88,7 +88,7 @@
                     android:fontFamily="@font/poppins_med"
                     android:gravity="center"
                     android:text="Smoker \nCessation"
-                    android:textColor="#222222"
+                    android:textColor="@color/grey"
                     android:textSize="10sp" />
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                     android:fontFamily="@font/poppins_med"
                     android:gravity="center"
                     android:text="Hasil \nPemeriksaan"
-                    android:textColor="#222222"
+                    android:textColor="@color/grey"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
@@ -177,7 +177,7 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Anda bukan perokok"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="20sp"/>
 
             <!-- CARD MOTIVASI -->
@@ -251,8 +251,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Manfaat yang sudah Anda dapatkan"
-
-                    android:textColor="#000000"
+                    android:textColor="@color/black"
                     android:textSize="16sp"/>
 
                 <!-- ITEM 1 -->
@@ -279,7 +278,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Paru-paru lebih sehat"
-                            android:textColor="#000000"
+                            android:textColor="@color/black"
                             android:textSize="15sp"/>
 
                         <TextView
@@ -287,7 +286,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_reg"
                             android:text="Risiko penyakit pernapasan lebih rendah"
-                            android:textColor="#333333"
+                            android:textColor="@color/grey"
                             android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -316,15 +315,15 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Risiko penyakit lebih rendah"
-                            android:textColor="#000000"
-                            android:textSize="15sp"/>
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_reg"
                             android:text="Jantung, stroke, dan kanker lebih terhindar"
-                            android:textColor="#333333"
+                            android:textColor="@color/grey"
                             android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -353,7 +352,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
                             android:text="Kualitas hidup lebih baik"
-                            android:textColor="#000000"
+                            android:textColor="@color/black"
                             android:textSize="15sp"/>
 
                         <TextView
@@ -361,7 +360,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_reg"
                             android:text="Energi lebih banyak dan hidup lebih optimal"
-                            android:textColor="#333333"
+                            android:textColor="@color/grey"
                             android:textSize="14sp"/>
                     </LinearLayout>
                 </LinearLayout>

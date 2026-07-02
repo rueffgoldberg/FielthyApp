@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Kondisi Kesehatan Anda"
-                    android:textColor="@color/black"
+                    android:textColor="@color/always_black"
                     android:textSize="19sp"
                     android:fontFamily="@font/poppins_bold"/>
 
@@ -195,7 +195,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Beberapa hasil pemeriksaan berada di luar batas normal. Disarankan segera berkonsultasi dengan tenaga kesehatan."
-                            android:textColor="@color/black"
+                            android:textColor="@color/always_black"
                             android:textSize="13sp"
                             android:fontFamily="@font/poppins_reg"
                             android:lineSpacingExtra="2dp"
@@ -218,7 +218,7 @@
                     android:text="Hasil Pemeriksaan"
                     android:textSize="20sp"
                     android:fontFamily="@font/poppins_bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/always_black"/>
 
                 <ImageView
                     android:id="@+id/imgBtnHasilPemeriksaan"
@@ -265,7 +265,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_monitor_scale"
-                            app:tint="@color/black"/>
+                            app:tint="@color/tab"/>
 
                         <!-- Bagian Tengah -->
                         <LinearLayout
@@ -279,7 +279,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Indeks Massa Tubuh (IMT)"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_med"/>
 
@@ -288,7 +288,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="25,66 kg/m²"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/poppins_bold"/>
                         </LinearLayout>
@@ -308,7 +308,7 @@
                                 android:background="@drawable/bg_status_normal"
                                 android:text="Normal"
                                 android:textSize="11sp"
-                                android:textColor="@color/grey"
+                                android:textColor="#757575"
                                 android:fontFamily="@font/poppins_med"/>
 
                             <ImageView
@@ -342,7 +342,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📋 Interpretasi Hasil"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -351,7 +351,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Berat badan Anda berada pada kategori overweight."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -368,7 +368,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠ Risiko Kesehatan"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -377,7 +377,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Risiko diabetes, hipertensi, dan penyakit jantung meningkat."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -394,7 +394,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="💡 Rekomendasi"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -403,7 +403,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="• Kurangi makanan tinggi kalori&#10;• Perbanyak aktivitas fisik&#10;• Pantau berat badan secara berkala"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg" />
                         </LinearLayout>
                     </LinearLayout>
@@ -439,7 +439,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_meteran"
-                            app:tint="@color/black"/>
+                            app:tint="@color/tab"/>
 
                         <!--Bagian Tengah-->
                         <LinearLayout
@@ -452,17 +452,17 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_med"
                                 android:text="Lingkar Perut"
-                                android:textColor="@color/black"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/poppins_med"/>
+                                android:textColor="@color/always_black"
+                                android:textSize="15sp" />
 
                             <TextView
                                 android:id="@+id/tV_hasil_lingkar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="......"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/poppins_bold"/>
                         </LinearLayout>
@@ -482,7 +482,7 @@
                                 android:gravity="center"
                                 android:text="Normal"
                                 android:textSize="11sp"
-                                android:textColor="@color/grey"
+                                android:textColor="#757575"
                                 android:fontFamily="@font/poppins_med"/>
 
                             <ImageView
@@ -516,7 +516,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📋 Interpretasi Hasil"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -525,7 +525,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Lingkar perut Anda berada dalam batas normal."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -542,7 +542,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠ Risiko Kesehatan"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -551,7 +551,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Risiko penumpukan lemak abdominal masih rendah."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -568,7 +568,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="💡 Rekomendasi"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -577,7 +577,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="• Pertahankan pola hidup sehat&#10;• Tetap aktif bergerak&#10;• Konsumsi makanan tinggi serat"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -613,7 +613,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_darah"
-                            app:tint="@color/black"/>
+                            app:tint="@color/tab"/>
 
                         <!--Bagian Tengah-->
                         <LinearLayout
@@ -627,7 +627,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tekanan Darah"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_med"/>
 
@@ -636,7 +636,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="......"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/poppins_bold"/>
                         </LinearLayout>
@@ -656,7 +656,7 @@
                                 android:gravity="center"
                                 android:text="Normal"
                                 android:textSize="11sp"
-                                android:textColor="@color/grey"
+                                android:textColor="#757575"
                                 android:fontFamily="@font/poppins_med"/>
 
                             <ImageView
@@ -690,7 +690,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📋 Interpretasi Hasil"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -714,7 +714,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠ Risiko Kesehatan"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -723,7 +723,7 @@
                                 android:id="@+id/tV_risiko_tekanan"
                                 android:layout_marginTop="6dp"
                                 android:text="Risiko hipertensi masih rendah."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -740,7 +740,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="💡 Rekomendasi"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -749,7 +749,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="• Kurangi konsumsi garam&#10;• Olahraga rutin&#10;• Kelola stres dengan baik"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -779,7 +779,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_gula_darah"
-                            app:tint="@color/black"/>
+                            app:tint="@color/tab"/>
 
                         <!--Bagian Tengah-->
                         <LinearLayout
@@ -793,7 +793,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Gula Darah Sewaktu"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_med"/>
 
@@ -802,7 +802,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="......"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/poppins_bold"/>
                         </LinearLayout>
@@ -822,7 +822,7 @@
                                 android:gravity="center"
                                 android:text="Normal"
                                 android:textSize="11sp"
-                                android:textColor="@color/grey"
+                                android:textColor="#757575"
                                 android:fontFamily="@font/poppins_med"/>
 
                             <ImageView
@@ -856,7 +856,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📋 Interpretasi Hasil"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -865,7 +865,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Kadar gula darah masih dalam batas normal."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -882,7 +882,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠ Risiko Kesehatan"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -891,7 +891,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Risiko diabetes masih rendah."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -908,7 +908,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="💡 Rekomendasi"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -917,7 +917,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="• Batasi konsumsi gula berlebih&#10;• Jaga pola makan sehat&#10;• Tetap aktif secara fisik"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -953,7 +953,7 @@
                             android:layout_width="28dp"
                             android:layout_height="28dp"
                             android:src="@drawable/ic_kolesterol"
-                            app:tint="@color/black"/>
+                            app:tint="@color/tab"/>
 
                         <!--Bagian Tengah-->
                         <LinearLayout
@@ -967,7 +967,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Kolesterol Total"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="15sp"
                                 android:fontFamily="@font/poppins_med"/>
 
@@ -976,7 +976,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="......"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/poppins_bold"/>
                         </LinearLayout>
@@ -996,7 +996,7 @@
                                 android:gravity="center"
                                 android:text="Normal"
                                 android:textSize="11sp"
-                                android:textColor="@color/grey"
+                                android:textColor="#757575"
                                 android:fontFamily="@font/poppins_med"/>
 
                             <ImageView
@@ -1030,7 +1030,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="📋 Interpretasi Hasil"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -1039,7 +1039,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Kadar kolesterol total berada dalam rentang normal."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -1056,7 +1056,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠ Risiko Kesehatan"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -1065,7 +1065,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="Risiko penyakit jantung akibat kolesterol masih rendah."
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
 
@@ -1082,7 +1082,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="💡 Rekomendasi"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_bold"/>
 
                             <TextView
@@ -1091,7 +1091,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="6dp"
                                 android:text="• Kurangi makanan berlemak jenuh&#10;• Perbanyak konsumsi serat&#10;• Lakukan aktivitas fisik secara rutin"
-                                android:textColor="@color/black"
+                                android:textColor="@color/always_black"
                                 android:fontFamily="@font/poppins_reg"/>
                         </LinearLayout>
                     </LinearLayout>
