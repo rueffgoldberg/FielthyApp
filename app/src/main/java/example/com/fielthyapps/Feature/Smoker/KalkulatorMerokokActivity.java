@@ -73,6 +73,7 @@ public class KalkulatorMerokokActivity extends AppCompatActivity {
             return;
         }
 
+        // Input nilai dari pengguna
         int batangPerHari = Integer.parseInt(batangStr);
         double hargaPerBungkus = Double.parseDouble(hargaStr);
         int isiPerBungkus = Integer.parseInt(isiStr);

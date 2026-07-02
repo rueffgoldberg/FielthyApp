@@ -133,9 +133,6 @@ public class FoodRecognitionActivity extends AppCompatActivity {
                 preview = new Preview.Builder().build();
 
                 imageAnalyzer = new ImageAnalysis.Builder()
-                        // How the Image Analyser should pipe in input, 1. every frame but drop no frame, or
-                        // 2. go to the latest frame and may drop some frame. The default is 2.
-                        // STRATEGY_KEEP_ONLY_LATEST. The following line is optional, kept here for clarity
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
 
