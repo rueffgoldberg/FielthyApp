@@ -127,10 +127,6 @@ public class TestSmokerActivity extends AppCompatActivity {
             return;
         }
 
-        int poin1 = getPoinPertanyaan1();
-        int poin2 = getPoinPertanyaan2();
-        int totalPoin = poin1 + poin2;
-
         String statusPerokok = getStatusPerokok(jawaban1, jawaban2);
 
         mLoading.show();
@@ -144,9 +140,6 @@ public class TestSmokerActivity extends AppCompatActivity {
         hashMap.put("merokok", merokok);
         hashMap.put("jawaban_pertanyaan_1", jawaban1);
         hashMap.put("jawaban_pertanyaan_2", jawaban2);
-        hashMap.put("poin_pertanyaan_1", poin1);
-        hashMap.put("poin_pertanyaan_2", poin2);
-        hashMap.put("total_poin", totalPoin);
         hashMap.put("status_perokok", statusPerokok);
         hashMap.put("date", formattedDate);
 
@@ -168,9 +161,6 @@ public class TestSmokerActivity extends AppCompatActivity {
                         intent.putExtra("uid", uid);
                         intent.putExtra("jawaban_pertanyaan_1", jawaban1);
                         intent.putExtra("jawaban_pertanyaan_2", jawaban2);
-                        intent.putExtra("poin_pertanyaan_1", poin1);
-                        intent.putExtra("poin_pertanyaan_2", poin2);
-                        intent.putExtra("total_poin", totalPoin);
                         intent.putExtra("status_perokok", statusPerokok);
                         intent.putExtra("status", "testsmoker");
 
@@ -203,22 +193,6 @@ public class TestSmokerActivity extends AppCompatActivity {
         if (rb2c.isChecked()) return "C";
         if (rb2d.isChecked()) return "D";
         return "";
-    }
-
-    private int getPoinPertanyaan1() {
-        if (rb1a.isChecked()) return 3;
-        if (rb1b.isChecked()) return 2;
-        if (rb1c.isChecked()) return 1;
-        if (rb1d.isChecked()) return 0;
-        return -1;
-    }
-
-    private int getPoinPertanyaan2() {
-        if (rb2a.isChecked()) return 0;
-        if (rb2b.isChecked()) return 1;
-        if (rb2c.isChecked()) return 2;
-        if (rb2d.isChecked()) return 3;
-        return -1;
     }
 
     private String getStatusPerokok(String jawaban1, String jawaban2) {
