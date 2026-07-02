@@ -88,48 +88,16 @@ public class SleepConfirmationActivity extends AppCompatActivity {
 
         DocumentReference docRef = fStore.collection("restpattern").document();
         HashMap<String, Object> map = new HashMap<>();
-        SimpleDateFormat sdfJam =
-                new SimpleDateFormat(
-                        "HH:mm",
-                        Locale.getDefault()
-                );
         map.put("uid", currentUser.getUid());
         map.put("id", docRef.getId());
         map.put("date", dateStr);
         map.put("day", dayStr);
         map.put("timesleep", formattedTime);
-        map.put(
-                "start_sleep",
-                sdfJam.format(
-                        new Date(startTime)
-                )
-        );
-
-        map.put(
-                "end_sleep",
-                sdfJam.format(
-                        new Date(endTime)
-                )
-        );
-
-        map.put(
-                "start_timestamp",
-                startTime
-        );
-
-        map.put(
-                "end_timestamp",
-                endTime
-        );
-        map.put("timestamp", startTime); // Used for sorting
 
         HashMap<String, Object> localMap = new HashMap<>(map);
         localMap.remove("timestamp");
 
-        // Save to SQLite
-        new DatabaseHelper(this).insertOrUpdateRecord(DatabaseHelper.TABLE_REST, docRef.getId(), localMap);
         
-        // Save to Firestore
         docRef.set(map).addOnSuccessListener(aVoid -> {
             Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
             finish();

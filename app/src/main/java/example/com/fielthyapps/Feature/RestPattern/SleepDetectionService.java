@@ -70,7 +70,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             if (Intent.ACTION_USER_PRESENT.equals(action) || Intent.ACTION_SCREEN_ON.equals(action)) {
                 Log.d("REST_TEST", "SCREEN ON RECEIVED");
 
-                // LOGIKA TIKTOK: Jika layar nyala saat lagi "tidur", FIX 100% BANGUN!
                 if (isSleeping) {
                     wakeUpDetected();
                 }
@@ -80,7 +79,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
 
                 if (screenOffTime <= 0) return;
 
-                // Logika Kalkulasi: Hitung durasi dari pertama kali layar dimatikan
                 long duration = System.currentTimeMillis() - screenOffTime;
                 if (duration >= INACTIVITY_LIMIT && !isSleeping) {
                     triggerConfirmation(duration, screenOffTime, System.currentTimeMillis());
@@ -90,7 +88,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 Log.d("REST_TEST", "SCREEN OFF RECEIVED");
                 screenOffTime = System.currentTimeMillis();
-                lastUserActivityTime = System.currentTimeMillis(); // Anchor waktu mulai
                 saveSleepState();
             }
         }
@@ -110,10 +107,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
         Log.d("REST_SERVICE", "SERVICE CREATED");
 
         sleepPrefs = getSharedPreferences("SleepMonitorPrefs", Context.MODE_PRIVATE);
-        isSleeping = sleepPrefs.getBoolean("IS_SLEEPING", false);
-        sleepStartTime = sleepPrefs.getLong("SLEEP_START_TIME", 0);
-        lastUserActivityTime = sleepPrefs.getLong("LAST_ACTIVITY_TIME", System.currentTimeMillis());
-        screenOffTime = sleepPrefs.getLong("SCREEN_OFF_TIME", 0);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -172,7 +165,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             return;
         }
 
-        // LOGIKA TIKTOK (Double Check): Jika layar HP menyala, reset semua perhitungan!
         if (powerManager.isInteractive()) {
             if (isSleeping) {
                 wakeUpDetected();
@@ -182,16 +174,10 @@ public class SleepDetectionService extends Service implements SensorEventListene
             return;
         }
 
-        // LOGIKA NAIK MOTOR: Cek posisi HP berdasarkan gravitasi (Sumbu Y)
-        // Nilai gravitasi maksimal adalah 9.8. Jika sumbu Y bernilai lebih dari 6.0,
-        // artinya HP sedang berdiri vertikal (di dalam kantong saku celana/jaket).
         boolean isVertical = Math.abs(y) > 6.0f;
         if (isVertical && !isSleeping) {
-            // Mustahil orang tidur di kasur dengan HP berdiri tegak. Ini pasti di saku celana!
-            lastUserActivityTime = System.currentTimeMillis(); // Paksa reset waktu agar tidak dikira tidur
         }
 
-        // Hitung selisih guncangan fisik
         float delta = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
 
         if (isSleeping) {
@@ -208,7 +194,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
                 }
             } else if (pendingWakeUpTime > 0) {
                 if (System.currentTimeMillis() - pendingWakeUpTime > 60 * 1000) {
-                    // Cuma jatuh sesaat / ngelindur. Batal bangun.
                     pendingWakeUpTime = 0;
                     heavyMovementCount = 0;
                 }
@@ -237,7 +222,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
         if (!isSleeping && idleDuration >= INACTIVITY_LIMIT) {
             isSleeping = true;
 
-            // LOGIKA WAKTU: Tarik waktu tidur persis ke momen layar HP dimatikan (bukan 10 menit setelahnya)
             if (screenOffTime > 0) {
                 sleepStartTime = screenOffTime;
             } else {
@@ -262,7 +246,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
 
         saveSleepState();
 
-        // Mencegah konfirmasi jika ketiduran kurang dari 1 menit untuk menghindari spam
         if (duration >= 60 * 1000) {
             triggerConfirmation(duration, sleepStartTime, System.currentTimeMillis());
         }
@@ -289,7 +272,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
         intent.putExtra("duration", duration);
         intent.putExtra("start_time", start);
         intent.putExtra("end_time", end);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
