@@ -181,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Pantau Aktivitas Fisik Anda"
-                        android:textColor="@color/black"
+                        android:textColor="@color/always_black"
                         android:textSize="16sp" />
 
                     <TextView
@@ -191,7 +191,7 @@
                         android:fontFamily="@font/poppins_med"
                         android:justificationMode="inter_word"
                         android:text="Lihat aktivitas fisik, kalori terbakar, dan detak jantung secara real-time untuk memahami kondisi tubuh Anda."
-                        android:textColor="@color/black"
+                        android:textColor="@color/always_black"
                         android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>

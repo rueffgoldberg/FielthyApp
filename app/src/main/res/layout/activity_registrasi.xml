@@ -65,14 +65,14 @@
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/bg_input_whiteblue"
                 android:drawableLeft="@drawable/ic_person"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/tab"
                 android:drawablePadding="15dp"
                 android:hint="Masukkan Nama Lengkap Anda"
                 android:inputType="textPersonName"
                 android:fontFamily="@font/poppins_reg"
                 android:paddingLeft="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="#757575"
                 android:textSize="13sp" />
 
             <!--Email-->
@@ -96,14 +96,14 @@
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/bg_input_whiteblue"
                 android:drawableLeft="@drawable/ic_email"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/tab"
                 android:drawablePadding="15dp"
                 android:hint="Masukkan Email Anda"
                 android:inputType="textEmailAddress"
                 android:fontFamily="@font/poppins_reg"
                 android:paddingLeft="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="#757575"
                 android:textSize="13sp" />
 
 
@@ -127,7 +127,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/bg_input_whiteblue"
-                android:drawableTint="@color/grey"
+                android:drawableTint="@color/tab"
                 android:drawableLeft="@drawable/ic_no_telp"
                 android:drawablePadding="15dp"
                 android:hint="Masukkan No. HP Anda"
@@ -135,7 +135,7 @@
                 android:inputType="phone"
                 android:paddingLeft="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="#757575"
                 android:textSize="13sp" />
 
             <!--Tanggal Lahir-->
@@ -150,6 +150,8 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"/>
 
+            <!--Jenis Kelamin-->
+
             <EditText
                 android:id="@+id/eT_date"
                 android:layout_width="match_parent"
@@ -158,20 +160,19 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="40dp"
                 android:background="@drawable/bg_input_whiteblue"
-                android:drawableTint="@color/grey"
-                android:drawableLeft="@drawable/ic_calendar"
-                android:drawablePadding="15dp"
-                android:hint="Pilih tanggal lahir"
-                android:fontFamily="@font/poppins_reg"
-                android:focusable="false"
                 android:clickable="true"
                 android:cursorVisible="false"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/tab"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_reg"
+                android:hint="Pilih tanggal lahir"
                 android:paddingLeft="15dp"
                 android:textColor="@color/black"
-                android:textColorHint="@color/grey"
+                android:textColorHint="#757575"
                 android:textSize="13sp" />
 
-            <!--Jenis Kelamin-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -208,7 +209,8 @@
                         android:id="@+id/iv_gender_male"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_male" />
+                        android:src="@drawable/ic_male"
+                        app:tint="@color/tab"/>
 
                     <TextView
                         android:id="@+id/layout_laki"
@@ -217,9 +219,9 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginLeft="4dp"
                         android:text="Laki-laki"
-                        android:textColor="@color/grey"
+                        android:textColorHint="#757575"
                         android:textSize="14sp"
-                        android:fontFamily="sans-serif"/>
+                        android:fontFamily="@font/poppins_reg"/>
                 </LinearLayout>
 
                 <!-- Perempuan -->
@@ -240,7 +242,8 @@
                         android:id="@+id/iv_gender_female"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_female"/>
+                        android:src="@drawable/ic_female"
+                        app:tint="@color/tab"/>
 
                     <TextView
                         android:id="@+id/layout_perempuan"
@@ -249,9 +252,9 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginLeft="4dp"
                         android:text="Perempuan"
-                        android:textColor="@color/black"
+                        android:textColorHint="#757575"
                         android:textSize="14sp"
-                        android:fontFamily="sans-serif"/>
+                        android:fontFamily="@font/poppins_reg"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -281,7 +284,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="15dp"
                     android:src="@drawable/ic_password"
-                    app:tint="@color/grey" />
+                    app:tint="@color/tab"/>
 
                 <EditText
                     android:id="@+id/eT_password_registrasi"
@@ -295,7 +298,7 @@
                     android:inputType="textPassword"
                     android:paddingStart="10dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="#757575"
                     android:textSize="13sp" />
 
                 <ImageView
@@ -382,7 +385,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="Google"
-                    android:textColor="@color/grey"
+                    android:textColor="#757575"
                     android:textSize="13sp"
                     android:fontFamily="@font/poppins_reg" />
             </LinearLayout>
@@ -409,6 +412,11 @@
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/tab" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 

@@ -89,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Status Pola Istirahat"
-                            android:textColor="@color/black"
+                            android:textColor="@color/always_black"
                             android:textSize="14sp"
                             android:fontFamily="@font/poppins_bold" />
 
@@ -110,7 +110,7 @@
                             android:layout_marginTop="4dp"
                             android:lineSpacingExtra="2dp"
                             android:text="Pola istirahat Anda konsisten dalam 7 hari terakhir."
-                            android:textColor="@color/black"
+                            android:textColor="@color/always_black"
                             android:textSize="10sp"
                             android:fontFamily="@font/poppins_med"/>
                     </LinearLayout>
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Konsistensi"
-                            android:textColor="@color/grey"
+                            android:textColor="#757575"
                             android:textSize="10sp"
                             android:fontFamily="@font/poppins_bold" />
 
@@ -146,7 +146,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Selisih 1 jam"
-                            android:textColor="@color/grey"
+                            android:textColor="#757575"
                             android:fontFamily="@font/poppins_med"
                             android:textSize="10sp" />
                     </LinearLayout>
@@ -545,6 +545,7 @@
                         android:lineSpacingExtra="3dp"
                         android:text="Pola istirahat Anda cukup konsisten selama 7 hari terakhir. Pertahankan kebiasaan istirahat yang baik untuk mendukung pemulihan tubuh."
                         android:textColor="@color/grey"
+                        android:justificationMode="inter_word"
                         android:fontFamily="@font/poppins_reg"
                         android:textSize="12sp" />
                 </LinearLayout>

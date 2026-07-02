@@ -31,7 +31,7 @@ import example.com.fielthyapps.HomeActivity;
 import example.com.fielthyapps.R;
 
 public class HasilStressActivity extends AppCompatActivity {
-    private TextView tV_hasil, tV_angka, tV_desc;
+    private TextView tV_hasil, tV_angka, tV_desc, tV_hasil_anda;
     private RecyclerView rV_tips;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
@@ -69,6 +69,7 @@ public class HasilStressActivity extends AppCompatActivity {
             rV_tips = findViewById(R.id.rV_tips);
             btnSelesai = findViewById(R.id.btn_selesai);
             iV_status = findViewById(R.id.iV_status);
+            tV_hasil_anda = findViewById(R.id.tV_hasil_anda);
             Intent iin = getIntent();
             final Bundle b = iin.getExtras();
 
@@ -118,6 +119,7 @@ public class HasilStressActivity extends AppCompatActivity {
         }
 
         if (status.equals("stress")) {
+            tV_hasil_anda.setText("Tingkat Stres Anda");
             DocumentReference checkdata = fStore.collection("stress").document(id);
 
             checkdata.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -274,6 +276,7 @@ public class HasilStressActivity extends AppCompatActivity {
                 tV_angka.setText("Score -");
             });
         } else if (status.equals("cemas")) {
+            tV_hasil_anda.setText("Tingkat Kecemasan Anda");
             DocumentReference checkdata = fStore.collection("cemas").document(id);
 
             checkdata.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -380,6 +383,7 @@ public class HasilStressActivity extends AppCompatActivity {
                 tV_angka.setText("Score -");
             });
         } else if (status.equals("depresi")) {
+            tV_hasil_anda.setText("Tingkat Depresi Anda");
             DocumentReference checkdata = fStore.collection("depresi").document(id);
 
             checkdata.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
