@@ -47,7 +47,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
     private static final float WAKEUP_THRESHOLD = 5.0f;
 
     // Waktu tunggu HP didiamkan (10 menit)
-    private static final long INACTIVITY_LIMIT = 10 * 60 * 1000;
+    private static final long INACTIVITY_LIMIT = 10 * 1000;
 
     private float lastX, lastY, lastZ;
     private long lastUserActivityTime = System.currentTimeMillis();
