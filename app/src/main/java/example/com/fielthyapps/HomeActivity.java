@@ -386,6 +386,7 @@ public class HomeActivity extends AppCompatActivity {
         ImageView btnClose = view.findViewById(R.id.btnClose);
         TextView tvWater = view.findViewById(R.id.tV_water);
         TextView tvPercent = view.findViewById(R.id.tV_percent);
+        TextView tvMl = view.findViewById(R.id.tV_ml);
         ProgressBar progressWater = view.findViewById(R.id.progressWater);
         Button btnTambah = view.findViewById(R.id.btnTambah);
         Button btnKurang = view.findViewById(R.id.btnKurang);
@@ -405,6 +406,11 @@ public class HomeActivity extends AppCompatActivity {
         btnClose.setOnClickListener(v -> dialog.dismiss());
 
         tvWater.setText(water + " / " + target);
+
+        int currentMl = water * 250;
+        int targetMl = target * 250;
+
+        tvMl.setText(currentMl + " / " + targetMl + " mL");
 
         int percent = 0;
 
@@ -430,6 +436,8 @@ public class HomeActivity extends AppCompatActivity {
                         .apply();
 
                 tvWater.setText(currentWater + " / " + currentTarget);
+
+                tvMl.setText((currentWater * 250) + " / " + (currentTarget * 250) + " mL");
 
                 int currentPercent = 0;
 
@@ -465,6 +473,8 @@ public class HomeActivity extends AppCompatActivity {
                         .apply();
 
                 tvWater.setText(currentWater + " / " + currentTarget);
+
+                tvMl.setText((currentWater * 250) + " / " + (currentTarget * 250) + " mL");
 
                 int currentPercent = 0;
 
@@ -503,6 +513,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 tvWater.setText(currentWater + " / " + currentTarget);
 
+                tvMl.setText((currentWater * 250) + " / " + (currentTarget * 250) + " mL");
+
                 int currentPercent = 0;
 
                 if (currentTarget > 0) {
@@ -539,6 +551,8 @@ public class HomeActivity extends AppCompatActivity {
                 tvTarget.setText(String.valueOf(currentTarget));
 
                 tvWater.setText(currentWater + " / " + currentTarget);
+
+                tvMl.setText((currentWater * 250) + " / " + (currentTarget * 250) + " mL");
 
                 int currentPercent = 0;
 
