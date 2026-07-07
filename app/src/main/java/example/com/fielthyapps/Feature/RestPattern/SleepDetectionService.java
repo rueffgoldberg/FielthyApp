@@ -107,6 +107,8 @@ public class SleepDetectionService extends Service implements SensorEventListene
         Log.d("REST_SERVICE", "SERVICE CREATED");
 
         sleepPrefs = getSharedPreferences("SleepMonitorPrefs", Context.MODE_PRIVATE);
+        // PERBAIKAN 1: Muat ingatan saat service diciptakan
+        loadSleepState();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -131,6 +133,10 @@ public class SleepDetectionService extends Service implements SensorEventListene
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // PERBAIKAN 2: Pastikan reset sensor dan muat memori jika service dihidupkan paksa oleh Android
+        isFirstSample = true;
+        loadSleepState();
+
         SharedPreferences prefs = getSharedPreferences("notif_prefs", MODE_PRIVATE);
         if (!prefs.getBoolean("notif_rest", true)) {
             stopSelf();
@@ -156,6 +162,17 @@ public class SleepDetectionService extends Service implements SensorEventListene
         return START_STICKY;
     }
 
+    // FUNGSI WAJIB UNTUK MENCEGAH HILANG INGATAN SAAT BACKGROUND DI-KILL
+    private void loadSleepState() {
+        if (sleepPrefs != null) {
+            isSleeping = sleepPrefs.getBoolean("IS_SLEEPING", false);
+            sleepStartTime = sleepPrefs.getLong("SLEEP_START_TIME", 0);
+            long savedActivity = sleepPrefs.getLong("LAST_ACTIVITY_TIME", 0);
+            lastUserActivityTime = (savedActivity > 0) ? savedActivity : System.currentTimeMillis();
+            screenOffTime = sleepPrefs.getLong("SCREEN_OFF_TIME", 0);
+        }
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0], y = event.values[1], z = event.values[2];
@@ -174,8 +191,10 @@ public class SleepDetectionService extends Service implements SensorEventListene
             return;
         }
 
+        // PERBAIKAN 3: Isi blok kode saku celana yang kosong
         boolean isVertical = Math.abs(y) > 6.0f;
         if (isVertical && !isSleeping) {
+            lastUserActivityTime = System.currentTimeMillis();
         }
 
         float delta = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
@@ -272,6 +291,8 @@ public class SleepDetectionService extends Service implements SensorEventListene
         intent.putExtra("duration", duration);
         intent.putExtra("start_time", start);
         intent.putExtra("end_time", end);
+        // PERBAIKAN 4: Tambahkan flag ini agar muncul menembus background HP Oppo/Xiaomi
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
