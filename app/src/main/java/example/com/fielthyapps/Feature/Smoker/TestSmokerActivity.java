@@ -134,49 +134,47 @@ public class TestSmokerActivity extends AppCompatActivity {
         DocumentReference documentReference = fStore.collection("smoker").document();
         String uid = currentUser.getUid();
 
+        int poin1 = getPoinPertanyaan1();
+        int poin2 = getPoinPertanyaan2();
+        int totalPoin = poin1 + poin2;
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
         hashMap.put("id", documentReference.getId());
         hashMap.put("merokok", merokok);
         hashMap.put("jawaban_pertanyaan_1", jawaban1);
         hashMap.put("jawaban_pertanyaan_2", jawaban2);
+        hashMap.put("poin_pertanyaan_1", poin1);
+        hashMap.put("poin_pertanyaan_2", poin2);
+        hashMap.put("total_poin", totalPoin);
         hashMap.put("status_perokok", statusPerokok);
         hashMap.put("date", formattedDate);
 
         DatabaseHelper dbHelper = new DatabaseHelper(TestSmokerActivity.this);
         dbHelper.insertOrUpdateRecord(DatabaseHelper.TABLE_SMOKER, documentReference.getId(), hashMap);
 
-        documentReference.set(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        mLoading.dismiss();
+        // Simpan ke Firestore tanpa memblokir navigasi
+        documentReference.set(hashMap);
 
-                        Toast.makeText(TestSmokerActivity.this,
-                                "Berhasil input data Smoker",
-                                Toast.LENGTH_SHORT).show();
+        mLoading.dismiss();
 
-                        Intent intent = new Intent(TestSmokerActivity.this, HasilSmokerActivity.class);
-                        intent.putExtra("id", documentReference.getId());
-                        intent.putExtra("uid", uid);
-                        intent.putExtra("jawaban_pertanyaan_1", jawaban1);
-                        intent.putExtra("jawaban_pertanyaan_2", jawaban2);
-                        intent.putExtra("status_perokok", statusPerokok);
-                        intent.putExtra("status", "testsmoker");
+        Toast.makeText(TestSmokerActivity.this,
+                "Berhasil input data Smoker",
+                Toast.LENGTH_SHORT).show();
 
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    mLoading.dismiss();
+        Intent intent = new Intent(TestSmokerActivity.this, HasilSmokerActivity.class);
+        intent.putExtra("id", documentReference.getId());
+        intent.putExtra("uid", uid);
+        intent.putExtra("jawaban_pertanyaan_1", jawaban1);
+        intent.putExtra("jawaban_pertanyaan_2", jawaban2);
+        intent.putExtra("poin_pertanyaan_1", poin1);
+        intent.putExtra("poin_pertanyaan_2", poin2);
+        intent.putExtra("total_poin", totalPoin);
+        intent.putExtra("status_perokok", statusPerokok);
+        intent.putExtra("status", "testsmoker");
 
-                    Toast.makeText(
-                            TestSmokerActivity.this,
-                            "Gagal menyimpan data",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                });
+        startActivity(intent);
+        finish();
     }
 
     private String getJawabanPertanyaan1() {
@@ -193,6 +191,22 @@ public class TestSmokerActivity extends AppCompatActivity {
         if (rb2c.isChecked()) return "C";
         if (rb2d.isChecked()) return "D";
         return "";
+    }
+
+    private int getPoinPertanyaan1() {
+        if (rb1a.isChecked()) return 3;
+        if (rb1b.isChecked()) return 2;
+        if (rb1c.isChecked()) return 1;
+        if (rb1d.isChecked()) return 0;
+        return -1;
+    }
+
+    private int getPoinPertanyaan2() {
+        if (rb2a.isChecked()) return 0;
+        if (rb2b.isChecked()) return 1;
+        if (rb2c.isChecked()) return 2;
+        if (rb2d.isChecked()) return 3;
+        return -1;
     }
 
     private String getStatusPerokok(String jawaban1, String jawaban2) {

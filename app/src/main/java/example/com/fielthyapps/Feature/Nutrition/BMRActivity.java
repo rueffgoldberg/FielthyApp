@@ -158,7 +158,7 @@ public class BMRActivity extends AppCompatActivity {
         imgArrow.animate().rotation(0).setDuration(200);
     }
 
-    // Memeriksa dan mengambil data pengguna (Umur & Gender) dari Firestore
+    // Memeriksa dan mengambil data pengguna (Umur & Gender) dari SQLite lokal & Firestore
     private void checkUserData() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -167,6 +167,21 @@ public class BMRActivity extends AppCompatActivity {
             return;
         }
 
+        // 1. Ambil dari SQLite lokal dulu (agar bisa offline)
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        HashMap<String, Object> localUser = dbHelper.getUserData(user.getUid());
+        if (localUser != null && !localUser.isEmpty()) {
+            Object umurObj = localUser.get("umur");
+            Object genderObj = localUser.get("gender");
+            if (umurObj != null) {
+                etUmur.setText(String.valueOf(umurObj));
+            }
+            if (genderObj != null && !genderObj.toString().isEmpty()) {
+                tvJenisKelamin.setText(genderObj.toString());
+            }
+        }
+
+        // 2. Coba ambil juga dari Firestore (update terbaru jika online)
         fStore.collection("user")
                 .document(user.getUid())
                 .get()

@@ -290,7 +290,11 @@
                         android:paddingEnd="12dp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/grey"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"/>
 
                     <TextView
                         android:layout_width="40dp"
