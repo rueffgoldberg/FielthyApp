@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (ApiException e) {
                 int statusCode = e.getStatusCode();
                 if (statusCode != GoogleSignInStatusCodes.SIGN_IN_CANCELLED && statusCode != 12501) {
-                    Toast.makeText(this, "Google Sign-In Gagal" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Google Sign-In Gagal (kode: " + statusCode + ")", Toast.LENGTH_SHORT).show();
                 }
             }
         }

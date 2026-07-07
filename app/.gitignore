@@ -1,1 +1,4 @@
 /build
+
+# Firebase - jangan di-push ke Git (mengandung API key sensitif)
+google-services.json

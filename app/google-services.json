@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "991447274305-7chv71f3c5r6tg5otu39q1u3k48brj73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "example.com.fielthyapps",
+            "certificate_hash": "8d6a72d6ca13e85009a297f1e2ebec9bdfedc370"
+          }
+        },
+        {
           "client_id": "991447274305-8g8l4tb7q5fstlfcrtdhj0tlqcrs67gf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
