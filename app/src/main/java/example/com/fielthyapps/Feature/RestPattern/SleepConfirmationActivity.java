@@ -132,12 +132,11 @@ public class SleepConfirmationActivity extends AppCompatActivity {
             // Simpan ke SQLite di jalur belakang (agar UI tidak freeze/ngelag)
             new DatabaseHelper(SleepConfirmationActivity.this).insertOrUpdateRecord(DatabaseHelper.TABLE_REST, docRef.getId(), localMap);
 
-            // Simpan ke Firestore (sudah otomatis menggunakan jalur belakang bawaan Firebase)
-            docRef.set(map).addOnSuccessListener(aVoid -> {
+            // Simpan ke Firestore tanpa memblokir navigasi
+            docRef.set(map);
+
+            runOnUiThread(() -> {
                 Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
-                finish();
-            }).addOnFailureListener(e -> {
-                Toast.makeText(SleepConfirmationActivity.this, "Gagal menyimpan ke cloud, data tersimpan lokal.", Toast.LENGTH_SHORT).show();
                 finish();
             });
         });

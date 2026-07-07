@@ -92,8 +92,30 @@ public class FoodRecognitionActivity extends AppCompatActivity {
             if (allPermissionsGranted()) {
                 startCamera();
             } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
-                finish();
+                // Cek apakah izin sudah ditolak permanen ("Jangan tanya lagi")
+                boolean isPermanentlyDenied = !ActivityCompat.shouldShowRequestPermissionRationale(
+                        this, Manifest.permission.CAMERA);
+
+                if (isPermanentlyDenied) {
+                    // Arahkan user ke halaman pengaturan aplikasi
+                    new android.app.AlertDialog.Builder(this)
+                            .setTitle("Izin Kamera Diperlukan")
+                            .setMessage("Fitur Food Recognition membutuhkan izin kamera.\n\nSilakan aktifkan izin Kamera secara manual melalui Pengaturan Aplikasi.")
+                            .setPositiveButton("Buka Pengaturan", (dialog, which) -> {
+                                android.content.Intent intent = new android.content.Intent(
+                                        android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                android.net.Uri uri = android.net.Uri.fromParts("package", getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);
+                                finish();
+                            })
+                            .setNegativeButton("Batal", (dialog, which) -> finish())
+                            .setCancelable(false)
+                            .show();
+                } else {
+                    Toast.makeText(this, "Izin kamera diperlukan untuk fitur ini", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         }
     }

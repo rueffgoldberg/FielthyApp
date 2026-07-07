@@ -85,30 +85,27 @@ public class SectionDuaActivity extends AppCompatActivity {
                 }
             }
 
-            // Simpan jawaban quest ke Firestore (bukan SQLite, karena kolom quest tidak ada di tabel lokal)
-            documentReference.set(answers)
-                    .addOnSuccessListener(unused -> {
-                        DocumentReference updatestress = fStore.collection("stresstest").document(id_doc);
-                        HashMap<String, Object> statusData = new HashMap<>();
-                        statusData.put("cemas", "1");
+            // Simpan jawaban quest ke Firestore tanpa memblokir navigasi
+            documentReference.set(answers);
 
-                        // Simpan hanya status flag ke SQLite lokal
-                        DatabaseHelper dbHelper = new DatabaseHelper(SectionDuaActivity.this);
-                        dbHelper.insertOrUpdateRecord(DatabaseHelper.TABLE_STRESS, id_doc, statusData);
+            DocumentReference updatestress = fStore.collection("stresstest").document(id_doc);
+            HashMap<String, Object> statusData = new HashMap<>();
+            statusData.put("cemas", "1");
 
-                        // Gunakan set+merge agar tidak crash jika dokumen stresstest belum ada
-                        updatestress.set(statusData, SetOptions.merge())
-                                .addOnSuccessListener(unused1 -> {
-                                    Toast.makeText(SectionDuaActivity.this, "Berhasil input data Cemas", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(SectionDuaActivity.this, HasilStressActivity.class);
-                                    intent.putExtra("status", "cemas");
-                                    intent.putExtra("id", id_doc);
-                                    intent.putExtra("type", "test");
-                                    startActivity(intent);
-                                    finish();
-                                });
-                    })
-                    .addOnFailureListener(e -> Log.w("Firestore", "Gagal menyimpan data cemas", e));
+            // Simpan hanya status flag ke SQLite lokal
+            DatabaseHelper dbHelper = new DatabaseHelper(SectionDuaActivity.this);
+            dbHelper.insertOrUpdateRecord(DatabaseHelper.TABLE_STRESS, id_doc, statusData);
+
+            // Gunakan set+merge agar tidak crash jika dokumen stresstest belum ada
+            updatestress.set(statusData, SetOptions.merge());
+
+            Toast.makeText(SectionDuaActivity.this, "Berhasil input data Cemas", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SectionDuaActivity.this, HasilStressActivity.class);
+            intent.putExtra("status", "cemas");
+            intent.putExtra("id", id_doc);
+            intent.putExtra("type", "test");
+            startActivity(intent);
+            finish();
         });
     }
 }

@@ -180,34 +180,28 @@ public class MedCheckActivity extends AppCompatActivity {
             DatabaseHelper dbHelper = new DatabaseHelper(MedCheckActivity.this);
             dbHelper.insertOrUpdateRecord(DatabaseHelper.TABLE_MEDCHECK, documentReference.getId(), hashMap);
 
+            // Simpan ke Firestore tanpa memblokir navigasi
+            documentReference.set(hashMap);
 
-            documentReference.set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(MedCheckActivity.this, "Berhasil input data Medcheck", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MedCheckActivity.this, HasilMedCheckActivity.class);
-                    intent.putExtra("id", documentReference.getId());
-                    intent.putExtra("uid", uid);
-                    intent.putExtra("gender", gender);
-                    intent.putExtra("berat", berat);
-                    intent.putExtra("tinggi", tinggi);
-                    intent.putExtra("lingkarperut", lingkar_perut);
-                    intent.putExtra("sistolik", sistolik);
-                    intent.putExtra("diastolik", diastolik);
-                    intent.putExtra("guladarah", guladarah);
-                    intent.putExtra("lemak", lemak);
-                    intent.putExtra("hasilbmi", hasil);
-                    intent.putExtra("status", "testmedcheck");
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
+            Toast.makeText(MedCheckActivity.this, "Berhasil input data Medcheck", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MedCheckActivity.this, HasilMedCheckActivity.class);
+            intent.putExtra("id", documentReference.getId());
+            intent.putExtra("uid", uid);
+            intent.putExtra("gender", gender);
+            intent.putExtra("berat", berat);
+            intent.putExtra("tinggi", tinggi);
+            intent.putExtra("lingkarperut", lingkar_perut);
+            intent.putExtra("sistolik", sistolik);
+            intent.putExtra("diastolik", diastolik);
+            intent.putExtra("guladarah", guladarah);
+            intent.putExtra("lemak", lemak);
+            intent.putExtra("hasilbmi", hasil);
+            intent.putExtra("status", "testmedcheck");
+            startActivity(intent);
+            finish();
         }
-
-
-
     }
+    
     private void checkUserData() {
         final FirebaseUser user = firebaseAuth.getCurrentUser();
 
