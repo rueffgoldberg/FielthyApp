@@ -183,7 +183,7 @@ public class HistoryActivity extends AppCompatActivity {
                 : categoryKey.equals(HistoryTimelineItem.CAT_MEDCHECK)  ? chipMedcheck
                 : categoryKey.equals(HistoryTimelineItem.CAT_PHYSICAL)  ? chipPhysical
                 : (categoryKey.equals(HistoryTimelineItem.CAT_SMOKER) || categoryKey.equals(HistoryTimelineItem.CAT_KALK_MEROKOK)) ? chipSmoker
-                : categoryKey.equals(HistoryTimelineItem.CAT_NUTRITION) ? chipNutrition
+                : (categoryKey.equals(HistoryTimelineItem.CAT_NUTRITION) || categoryKey.equals(HistoryTimelineItem.CAT_BMR) || categoryKey.equals(HistoryTimelineItem.CAT_FOOD_RECOG)) ? chipNutrition
                 : categoryKey.equals(HistoryTimelineItem.CAT_STRESS)    ? chipStress
                 : chipRest;
         selected.setBackground(getDrawable(R.drawable.bg_chip_selected));
@@ -440,6 +440,12 @@ public class HistoryActivity extends AppCompatActivity {
                 if (activeCategory.equals(HistoryTimelineItem.CAT_SMOKER)) {
                     if (!item.getCategoryKey().equals(HistoryTimelineItem.CAT_SMOKER) &&
                             !item.getCategoryKey().equals(HistoryTimelineItem.CAT_KALK_MEROKOK)) {
+                        continue;
+                    }
+                } else if (activeCategory.equals(HistoryTimelineItem.CAT_NUTRITION)) {
+                    if (!item.getCategoryKey().equals(HistoryTimelineItem.CAT_NUTRITION) &&
+                            !item.getCategoryKey().equals(HistoryTimelineItem.CAT_BMR) &&
+                            !item.getCategoryKey().equals(HistoryTimelineItem.CAT_FOOD_RECOG)) {
                         continue;
                     }
                 } else if (!activeCategory.equals(item.getCategoryKey())) {

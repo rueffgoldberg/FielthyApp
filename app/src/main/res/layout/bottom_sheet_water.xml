@@ -71,6 +71,36 @@
         android:fontFamily="@font/poppins_med"
         android:textSize="16sp" />
 
+    <!-- Informasi mL -->
+    <LinearLayout
+        android:id="@+id/layoutWaterInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/circle_tab"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_gelas_kosong"
+            app:tint="@color/white"/>
+
+        <TextView
+            android:id="@+id/tV_ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1000 / 2000 mL"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_bold"/>
+    </LinearLayout>
+
     <!-- Gelas Dinamis -->
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/layoutCup"
@@ -182,7 +212,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="8dp"
-        android:text="Minimal 4 gelas • Maksimal 12 gelas"
+        android:text="Minimal 4 gelas • Maksimal 12 gelas \n1 Gelas = 250mL"
         android:textColor="@color/grey"
         android:textSize="12sp"
         android:fontFamily="@font/poppins_reg"/>

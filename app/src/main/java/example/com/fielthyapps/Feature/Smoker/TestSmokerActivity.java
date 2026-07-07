@@ -109,23 +109,23 @@ public class TestSmokerActivity extends AppCompatActivity {
     }
 
     private void submitTest() {
-        String jawaban1 = getJawabanPertanyaan1();
-        String jawaban2 = getJawabanPertanyaan2();
+            String jawaban1 = getJawabanPertanyaan1();
+            String jawaban2 = getJawabanPertanyaan2();
 
-        if (jawaban1.isEmpty()) {
-            Toast.makeText(this, "Pilih jawaban pertanyaan 1 terlebih dahulu", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            if (jawaban1.isEmpty()) {
+                Toast.makeText(this, "Pilih jawaban pertanyaan 1 terlebih dahulu", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        if (jawaban2.isEmpty()) {
-            Toast.makeText(this, "Pilih jawaban pertanyaan 2 terlebih dahulu", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            if (jawaban2.isEmpty()) {
+                Toast.makeText(this, "Pilih jawaban pertanyaan 2 terlebih dahulu", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        if (currentUser == null) {
-            Toast.makeText(this, "User belum login", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            if (currentUser == null) {
+                Toast.makeText(this, "User belum login", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
         String statusPerokok = getStatusPerokok(jawaban1, jawaban2);
 

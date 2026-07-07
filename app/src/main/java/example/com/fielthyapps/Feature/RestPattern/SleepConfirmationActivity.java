@@ -1,5 +1,7 @@
 package example.com.fielthyapps.Feature.RestPattern;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import example.com.fielthyapps.Database.DatabaseHelper;
@@ -30,10 +34,20 @@ public class SleepConfirmationActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private FirebaseUser currentUser;
 
+    // Pembuatan Jalur Belakang (Background Thread) untuk kelancaran UI
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep_confirmation);
+
+        // 1. PEMBUNUH NOTIFIKASI OTOMATIS
+        // Langsung hapus notifikasi dari laci sistem saat layar Pop-up ini muncul
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            manager.cancel(4); // 4 adalah CONFIRM_NOTIFICATION_ID dari Service
+        }
 
         tvQuestion = findViewById(R.id.tv_sleep_question);
         tvDuration = findViewById(R.id.tv_sleep_duration);
@@ -57,6 +71,11 @@ public class SleepConfirmationActivity extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Kunci tombol agar tidak bisa ditekan 2 kali (mencegah data ganda)
+                btnYes.setEnabled(false);
+                btnNo.setEnabled(false);
+                Toast.makeText(SleepConfirmationActivity.this, "Menyimpan data istirahat...", Toast.LENGTH_SHORT).show();
+
                 saveSleepData();
             }
         });
@@ -64,6 +83,10 @@ public class SleepConfirmationActivity extends AppCompatActivity {
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Kunci tombol saat ditekan
+                btnYes.setEnabled(false);
+                btnNo.setEnabled(false);
+
                 Toast.makeText(SleepConfirmationActivity.this, "Data diabaikan.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -88,22 +111,35 @@ public class SleepConfirmationActivity extends AppCompatActivity {
 
         DocumentReference docRef = fStore.collection("restpattern").document();
         HashMap<String, Object> map = new HashMap<>();
+        SimpleDateFormat sdfJam = new SimpleDateFormat("HH:mm", Locale.getDefault());
+
         map.put("uid", currentUser.getUid());
         map.put("id", docRef.getId());
         map.put("date", dateStr);
         map.put("day", dayStr);
         map.put("timesleep", formattedTime);
+        map.put("start_sleep", sdfJam.format(new Date(startTime)));
+        map.put("end_sleep", sdfJam.format(new Date(endTime)));
+        map.put("start_timestamp", startTime);
+        map.put("end_timestamp", endTime);
+        map.put("timestamp", startTime); // Digunakan untuk sorting
 
         HashMap<String, Object> localMap = new HashMap<>(map);
         localMap.remove("timestamp");
 
-        
-        docRef.set(map).addOnSuccessListener(aVoid -> {
-            Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
-            finish();
-        }).addOnFailureListener(e -> {
-            Toast.makeText(SleepConfirmationActivity.this, "Gagal menyimpan ke cloud, data tersimpan lokal.", Toast.LENGTH_SHORT).show();
-            finish();
+        // 2. MELEMPAR PROSES DATABASE KE JALUR BELAKANG
+        executor.execute(() -> {
+            // Simpan ke SQLite di jalur belakang (agar UI tidak freeze/ngelag)
+            new DatabaseHelper(SleepConfirmationActivity.this).insertOrUpdateRecord(DatabaseHelper.TABLE_REST, docRef.getId(), localMap);
+
+            // Simpan ke Firestore (sudah otomatis menggunakan jalur belakang bawaan Firebase)
+            docRef.set(map).addOnSuccessListener(aVoid -> {
+                Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
+                finish();
+            }).addOnFailureListener(e -> {
+                Toast.makeText(SleepConfirmationActivity.this, "Gagal menyimpan ke cloud, data tersimpan lokal.", Toast.LENGTH_SHORT).show();
+                finish();
+            });
         });
     }
 }
