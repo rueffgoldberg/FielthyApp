@@ -47,7 +47,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
     private static final float WAKEUP_THRESHOLD = 5.0f;
 
     // Waktu tunggu HP didiamkan (10 menit)
-    private static final long INACTIVITY_LIMIT = 10 * 1000;
+    private static final long INACTIVITY_LIMIT = 10 * 60 * 1000;
 
     private float lastX, lastY, lastZ;
     private long lastUserActivityTime = System.currentTimeMillis();
@@ -107,7 +107,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
         Log.d("REST_SERVICE", "SERVICE CREATED");
 
         sleepPrefs = getSharedPreferences("SleepMonitorPrefs", Context.MODE_PRIVATE);
-        // PERBAIKAN 1: Muat ingatan saat service diciptakan
         loadSleepState();
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -133,7 +132,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // PERBAIKAN 2: Pastikan reset sensor dan muat memori jika service dihidupkan paksa oleh Android
         isFirstSample = true;
         loadSleepState();
 
@@ -162,7 +160,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
         return START_STICKY;
     }
 
-    // FUNGSI WAJIB UNTUK MENCEGAH HILANG INGATAN SAAT BACKGROUND DI-KILL
     private void loadSleepState() {
         if (sleepPrefs != null) {
             isSleeping = sleepPrefs.getBoolean("IS_SLEEPING", false);
@@ -191,7 +188,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             return;
         }
 
-        // PERBAIKAN 3: Isi blok kode saku celana yang kosong
         boolean isVertical = Math.abs(y) > 6.0f;
         if (isVertical && !isSleeping) {
             lastUserActivityTime = System.currentTimeMillis();
@@ -283,6 +279,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
         }
     }
 
+    // --- FUNGSI TRIGGER YANG SUDAH DIBERSIHKAN DARI NOTIFIKASI GANTUNG ---
     private void triggerConfirmation(long duration, long start, long end) {
         SharedPreferences prefs = getSharedPreferences("notif_prefs", MODE_PRIVATE);
         if (!prefs.getBoolean("notif_rest", true)) return;
@@ -291,30 +288,16 @@ public class SleepDetectionService extends Service implements SensorEventListene
         intent.putExtra("duration", duration);
         intent.putExtra("start_time", start);
         intent.putExtra("end_time", end);
-        // PERBAIKAN 4: Tambahkan flag ini agar muncul menembus background HP Oppo/Xiaomi
+
+        // FLAG MUTLAK: Wajib ada agar layar bisa dibuka dari Service/Background
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CONFIRM_CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Konfirmasi Bangun")
-                .setContentText("Istirahat: " + formatDuration(duration) + ". Simpan?")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
-                .setContentIntent(pendingIntent)
-                .setFullScreenIntent(pendingIntent, true)
-                .setAutoCancel(true)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-
-        Notification notification = builder.build();
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager != null) manager.notify(CONFIRM_NOTIFICATION_ID, notification);
-
         try {
+            // EKSEKUSI LANGSUNG: Buka layar tanpa membuat notifikasi di laci atas!
             startActivity(intent);
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            Log.e("REST_SERVICE", "Gagal memunculkan popup: " + e.getMessage());
+        }
     }
 
     private String formatDuration(long duration) {
@@ -370,6 +353,9 @@ public class SleepDetectionService extends Service implements SensorEventListene
             NotificationManager nm = getSystemService(NotificationManager.class);
             if (nm != null) {
                 nm.createNotificationChannel(new NotificationChannel(CHANNEL_ID, "Monitoring", NotificationManager.IMPORTANCE_LOW));
+
+                // Channel Konfirmasi dipertahankan hanya agar sistem tidak crash jika ada sisa cache,
+                // tapi kita sudah tidak menggunakannya untuk menembak notifikasi.
                 NotificationChannel confirm = new NotificationChannel(CONFIRM_CHANNEL_ID, "Konfirmasi Bangun", NotificationManager.IMPORTANCE_HIGH);
                 confirm.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
                 confirm.setDescription("Notifikasi popup untuk konfirmasi waktu bangun tidur");
