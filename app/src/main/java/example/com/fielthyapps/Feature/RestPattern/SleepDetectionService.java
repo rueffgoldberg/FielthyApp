@@ -46,7 +46,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
     private static final float ACTIVITY_THRESHOLD = 0.5f;
     private static final float WAKEUP_THRESHOLD = 5.0f;
 
-    // Waktu tunggu HP didiamkan (10 menit)
+    // PERBAIKAN 1: Dikembalikan menjadi 10 Menit (Bukan 10 Detik lagi)
     private static final long INACTIVITY_LIMIT = 10 * 60 * 1000;
 
     private float lastX, lastY, lastZ;
@@ -67,23 +67,22 @@ public class SleepDetectionService extends Service implements SensorEventListene
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            if (Intent.ACTION_USER_PRESENT.equals(action) || Intent.ACTION_SCREEN_ON.equals(action)) {
-                Log.d("REST_TEST", "SCREEN ON RECEIVED");
-
+            // PERBAIKAN 2: Hanya Bangun jika User MEMBUKA KUNCI HP (Unlock)
+            if (Intent.ACTION_USER_PRESENT.equals(action)) {
+                Log.d("REST_TEST", "USER UNLOCKED PHONE");
                 if (isSleeping) {
                     wakeUpDetected();
                 }
-
                 lastUserActivityTime = System.currentTimeMillis();
                 saveSleepState();
 
-                if (screenOffTime <= 0) return;
-
-                long duration = System.currentTimeMillis() - screenOffTime;
-                if (duration >= INACTIVITY_LIMIT && !isSleeping) {
-                    triggerConfirmation(duration, screenOffTime, System.currentTimeMillis());
+                // Jika hanya layar menyala (karena notif WA/Email), JANGAN DIBANGUNKAN!
+            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                Log.d("REST_TEST", "SCREEN ON RECEIVED");
+                if (!isSleeping) {
+                    lastUserActivityTime = System.currentTimeMillis();
+                    saveSleepState();
                 }
-                screenOffTime = 0;
 
             } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 Log.d("REST_TEST", "SCREEN OFF RECEIVED");
@@ -104,8 +103,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("REST_SERVICE", "SERVICE CREATED");
-
         sleepPrefs = getSharedPreferences("SleepMonitorPrefs", Context.MODE_PRIVATE);
         loadSleepState();
 
@@ -179,15 +176,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             return;
         }
 
-        if (powerManager.isInteractive()) {
-            if (isSleeping) {
-                wakeUpDetected();
-            }
-            lastUserActivityTime = System.currentTimeMillis();
-            lastX = x; lastY = y; lastZ = z;
-            return;
-        }
-
         boolean isVertical = Math.abs(y) > 6.0f;
         if (isVertical && !isSleeping) {
             lastUserActivityTime = System.currentTimeMillis();
@@ -196,6 +184,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
         float delta = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
 
         if (isSleeping) {
+            // Murni mengandalkan pergerakan keras (bukan lagi karena layar terang)
             if (delta > WAKEUP_THRESHOLD) {
                 if (pendingWakeUpTime == 0) {
                     pendingWakeUpTime = System.currentTimeMillis();
@@ -214,7 +203,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
                 }
             }
         } else {
-            if (delta > ACTIVITY_THRESHOLD) {
+            if (delta > ACTIVITY_THRESHOLD || powerManager.isInteractive()) {
                 lastUserActivityTime = System.currentTimeMillis();
             }
         }
@@ -226,12 +215,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
     private void checkSleepStatus() {
-        if (powerManager.isInteractive()) {
-            lastUserActivityTime = System.currentTimeMillis();
-            saveSleepState();
-            return;
-        }
-
         long idleDuration = System.currentTimeMillis() - lastUserActivityTime;
 
         if (!isSleeping && idleDuration >= INACTIVITY_LIMIT) {
@@ -279,7 +262,7 @@ public class SleepDetectionService extends Service implements SensorEventListene
         }
     }
 
-    // --- FUNGSI TRIGGER YANG SUDAH DIBERSIHKAN DARI NOTIFIKASI GANTUNG ---
+    // PERBAIKAN 3: KEMBALINYA NOTIFIKASI SILUMAN UNTUK MENYELAMATKAN DATA
     private void triggerConfirmation(long duration, long start, long end) {
         SharedPreferences prefs = getSharedPreferences("notif_prefs", MODE_PRIVATE);
         if (!prefs.getBoolean("notif_rest", true)) return;
@@ -288,12 +271,25 @@ public class SleepDetectionService extends Service implements SensorEventListene
         intent.putExtra("duration", duration);
         intent.putExtra("start_time", start);
         intent.putExtra("end_time", end);
-
-        // FLAG MUTLAK: Wajib ada agar layar bisa dibuka dari Service/Background
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
+        // Notifikasi Jaring Pengaman (Hanya akan terlihat jika Pop-up diblokir Xiaomi)
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CONFIRM_CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("Konfirmasi Bangun")
+                .setContentText("Istirahat: " + formatDuration(duration) + ". Simpan?")
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_ALARM)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) manager.notify(CONFIRM_NOTIFICATION_ID, builder.build());
+
         try {
-            // EKSEKUSI LANGSUNG: Buka layar tanpa membuat notifikasi di laci atas!
+            // Tetap paksa tembak layar Pop-up!
             startActivity(intent);
         } catch (Exception e) {
             Log.e("REST_SERVICE", "Gagal memunculkan popup: " + e.getMessage());
@@ -353,9 +349,6 @@ public class SleepDetectionService extends Service implements SensorEventListene
             NotificationManager nm = getSystemService(NotificationManager.class);
             if (nm != null) {
                 nm.createNotificationChannel(new NotificationChannel(CHANNEL_ID, "Monitoring", NotificationManager.IMPORTANCE_LOW));
-
-                // Channel Konfirmasi dipertahankan hanya agar sistem tidak crash jika ada sisa cache,
-                // tapi kita sudah tidak menggunakannya untuk menembak notifikasi.
                 NotificationChannel confirm = new NotificationChannel(CONFIRM_CHANNEL_ID, "Konfirmasi Bangun", NotificationManager.IMPORTANCE_HIGH);
                 confirm.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
                 confirm.setDescription("Notifikasi popup untuk konfirmasi waktu bangun tidur");
