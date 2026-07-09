@@ -58,7 +58,18 @@ public class SectionSatuActivity extends AppCompatActivity {
         rV_pertama.setAdapter(adapter);
 
         btn_lanjut.setOnClickListener(view -> {
-            if (firebaseUser == null) return;
+            if (firebaseUser == null) {
+                Toast.makeText(this, "User belum login", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            for (int i = 0; i < questions.size(); i++) {
+                if (questions.get(i).getSelectedOption() == -1) {
+                    Toast.makeText(this, "Harap jawab semua pertanyaan terlebih dahulu", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
             String uid = firebaseUser.getUid();
             String intentId = getIntent().getStringExtra("id");
             final String id_doc = (intentId != null) ? intentId : fStore.collection("stress").document().getId();
@@ -71,12 +82,8 @@ public class SectionSatuActivity extends AppCompatActivity {
             for (int i = 0; i < questions.size(); i++) {
                 QuestList question = questions.get(i);
                 int selectedOption = question.getSelectedOption();
-                if (selectedOption != -1) {
-                    String selectedOptionText = question.getOptions().get(selectedOption);
-                    answers.put("quest" + (i + 1), selectedOptionText);
-                } else {
-                    answers.put("quest" + (i + 1), "Tidak ada jawaban dipilih");
-                }
+                String selectedOptionText = question.getOptions().get(selectedOption);
+                answers.put("quest" + (i + 1), selectedOptionText);
             }
 
             // Simpan jawaban quest ke Firestore tanpa memblokir navigasi

@@ -131,6 +131,13 @@ public class HasilStressActivity extends AppCompatActivity {
                             String textHasil = "";
                             if (data != null) {
                                 int totalHasil = calculateTotalHasil(data);
+                                if (totalHasil == -1) {
+                                    tV_hasil.setText("Data Tidak Lengkap");
+                                    tV_hasil.setTextColor(Color.parseColor("#C6110A"));
+                                    tV_angka.setText("Score -");
+                                    tV_desc.setText("Kuesioner belum diselesaikan secara lengkap.");
+                                    return;
+                                }
                                 Log.d("Score", "Score " + totalHasil);
                                 SmokerTipsList[] myListData;
                                 if (totalHasil < 12) {
@@ -287,6 +294,13 @@ public class HasilStressActivity extends AppCompatActivity {
                             Map<String, Object> data = documentSnapshot.getData();
                             if (data != null) {
                                 int totalHasil = calculateTotalHasil(data);
+                                if (totalHasil == -1) {
+                                    tV_hasil.setText("Data Tidak Lengkap");
+                                    tV_hasil.setTextColor(Color.parseColor("#C6110A"));
+                                    tV_angka.setText("Score -");
+                                    tV_desc.setText("Kuesioner belum diselesaikan secara lengkap.");
+                                    return;
+                                }
                                 Log.d("Score", "Score " + totalHasil);
                                 SmokerTipsList[] myListData;
                                 if (totalHasil < 6) {
@@ -394,6 +408,13 @@ public class HasilStressActivity extends AppCompatActivity {
                             Map<String, Object> data = documentSnapshot.getData();
                             if (data != null) {
                                 int totalHasil = calculateTotalHasil(data);
+                                if (totalHasil == -1) {
+                                    tV_hasil.setText("Data Tidak Lengkap");
+                                    tV_hasil.setTextColor(Color.parseColor("#C6110A"));
+                                    tV_angka.setText("Score -");
+                                    tV_desc.setText("Kuesioner belum diselesaikan secara lengkap.");
+                                    return;
+                                }
                                 Log.d("Score", "Score " + totalHasil);
                                 SmokerTipsList[] myListData;
                                 if (totalHasil < 7) {
@@ -502,7 +523,8 @@ public class HasilStressActivity extends AppCompatActivity {
             String questKey = "quest" + i;
             String answer = (String) data.get(questKey);
 
-            if (answer != null) {
+            // UBAH DI SINI: Cek jika data tidak null dan tidak kosong
+            if (answer != null && !answer.trim().isEmpty()) {
                 int hasil = 0;
                 switch (answer) {
                     case "Tidak sesuai/tidak pernah":
@@ -518,10 +540,13 @@ public class HasilStressActivity extends AppCompatActivity {
                         hasil = 3;
                         break;
                     default:
-                        hasil = 0; // Jika jawaban tidak dikenali, anggap nilai 0
-                        break;
+                        Toast.makeText(HasilStressActivity.this, "Data tidak valid! Pertanyaan ke-" + i + " belum dijawab.", Toast.LENGTH_LONG).show();
+                        return -1;
                 }
                 totalHasil += hasil;
+            } else {
+                Toast.makeText(HasilStressActivity.this, "Data tidak valid! Pertanyaan ke-" + i + " belum dijawab.", Toast.LENGTH_LONG).show();
+                return -1;
             }
         }
         return totalHasil;
