@@ -214,15 +214,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_med"
-                    android:text="8% AKG*&#10;Rendah"
-                    android:textAlignment="textEnd"
-                    android:textColor="#FF9500"
-                    android:textSize="9sp" />
             </LinearLayout>
 
             <!-- Karbohidrat -->
@@ -265,15 +256,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_med"
-                    android:text="55% AKG*&#10;Sedang"
-                    android:textAlignment="textEnd"
-                    android:textColor="#FF5A5A"
-                    android:textSize="9sp" />
             </LinearLayout>
 
             <!-- Lemak -->
@@ -316,15 +298,6 @@
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_med"
-                    android:text="14% AKG*&#10;Rendah"
-                    android:textAlignment="textEnd"
-                    android:textColor="#7B58D8"
-                    android:textSize="9sp" />
             </LinearLayout>
 
             <TextView
