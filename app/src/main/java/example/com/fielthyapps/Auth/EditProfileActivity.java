@@ -227,7 +227,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void uploadPhoto() {
-        mLoading.setMessage("Menyimpan Foto ke ImageKit...");
+        mLoading.setMessage("Menyimpan Foto...");
 
         try {
             InputStream inputStream = getContentResolver().openInputStream(pickedImage);
