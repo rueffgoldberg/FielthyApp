@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".Feature.Smoker.TestSmokerActivity"
-    android:background="@color/white">
+    tools:context=".Feature.Smoker.TestSmokerActivity">
 
     <LinearLayout
         android:id="@+id/LinearLayout11"
@@ -15,14 +15,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingStart="24dp"
-        android:paddingEnd="24dp"
         android:paddingTop="5dp"
+        android:paddingEnd="24dp"
         android:paddingBottom="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!--Header atas-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp">
@@ -35,7 +34,7 @@
                 android:layout_centerVertical="true"
                 android:padding="6dp"
                 android:src="@drawable/ic_backward"
-                app:tint="@color/black"/>
+                app:tint="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Kategori"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </RelativeLayout>
 
         <TextView
@@ -55,9 +54,8 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Smoker Cessation"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
-        <!--Progress-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +64,6 @@
             android:gravity="top|center_horizontal"
             android:orientation="horizontal">
 
-            <!--Step 1-->
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -76,7 +73,7 @@
                 <View
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:background="@drawable/circle_active"/>
+                    android:background="@drawable/circle_active" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,17 +83,15 @@
                     android:gravity="center"
                     android:text="Smoker \nCessation"
                     android:textColor="@color/grey"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
             </LinearLayout>
 
-            <!--Garis-->
             <View
                 android:layout_width="55dp"
                 android:layout_height="1.5dp"
                 android:layout_marginTop="13dp"
-                android:background="@color/grey"/>
+                android:background="@color/grey" />
 
-            <!--Step 2-->
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -106,7 +101,7 @@
                 <View
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:background="@drawable/circle_active"/>
+                    android:background="@drawable/circle_active" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,17 +111,15 @@
                     android:gravity="center"
                     android:text="Form \nPemeriksaan"
                     android:textColor="@color/grey"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
             </LinearLayout>
 
-            <!--Garis 2-->
             <View
                 android:layout_width="55dp"
                 android:layout_height="1.5dp"
                 android:layout_marginTop="13dp"
-                android:background="@color/grey"/>
+                android:background="@color/grey" />
 
-            <!--Step 3-->
             <LinearLayout
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -136,7 +129,7 @@
                 <View
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:background="@drawable/circle_out"/>
+                    android:background="@drawable/circle_out" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -144,325 +137,42 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/poppins_med"
                     android:gravity="center"
-                    android:text="Form \nPemeriksaan"
+                    android:text="Hasil \nPemeriksaan"
                     android:textColor="@color/grey"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pertanyaan_smoker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="17dp"
-        android:fillViewport="true"
+        android:clipToPadding="false"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/LinearLayout11"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_hasil"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/LinearLayout11"
+        tools:listitem="@layout/item_question_smoker" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_hasil"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_btn_green_new"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Submit >"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@drawable/bg_white_stroke_blue"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <!--Judul-->
-                <TextView
-                    android:id="@+id/tV_pertanyaan_smoker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="PERTANYAAN 1"
-                    android:textColor="@color/green2"
-                    android:textSize="30sp"/>
-
-                <!--Pertanyaan-->
-                <TextView
-                    android:id="@+id/tV_soal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Berapa lama waktu yang Anda butuhkan untuk menghisap rokok pertama Anda setelah bangun tidur di pagi hari?"
-                    android:textColor="@color/always_black"
-                    android:lineSpacingExtra="4dp"
-                    android:justificationMode="inter_word"
-                    android:textSize="18sp"/>
-
-                <!--Option-->
-                <RadioGroup
-                    android:id="@+id/radio_group_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp">
-
-                    <!--Option 1-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_1a"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="Kurang dari 5 menit"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 2-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_1b"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="6 - 30 menit"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 3-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_1c"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="31 - 60 menit"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 4-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_1d"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="Lebih dari 60 menit"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-                </RadioGroup>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@drawable/bg_white_stroke_blue"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <!--Judul-->
-                <TextView
-                    android:id="@+id/tV_pertanyaan_smoker2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="PERTANYAAN 2"
-                    android:textColor="@color/green2"
-                    android:textSize="30sp"/>
-
-                <!--Pertanyaan-->
-                <TextView
-                    android:id="@+id/tV_soal2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:lineSpacingExtra="4dp"
-                    android:justificationMode="inter_word"
-                    android:text="Berapa jumlah batang rokok yang Anda habiskan dalam satu hari?"
-                    android:textColor="@color/always_black"
-                    android:textSize="18sp"/>
-
-                <!--Option-->
-                <RadioGroup
-                    android:id="@+id/radio_group_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp">
-
-                    <!--Option 1-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_2a"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="Kurang dari 10 batang"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 2-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_2b"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="11 - 20 batang"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 3-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_2c"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="21 - 30 batang"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-
-                    <!--Option 4-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:layout_marginBottom="14dp"
-                        android:background="@drawable/bg_input_whiteblue2">
-
-                        <RadioButton
-                            android:id="@+id/rb_2d"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="14dp"
-                            android:buttonTint="@color/black"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/poppins_med"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
-                            android:text="Lebih dari 30 batang"
-                            android:textColor="@color/always_black"
-                            android:textSize="15sp"/>
-                    </RelativeLayout>
-                </RadioGroup>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btn_hasil"
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_btn_green_new"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Submit ›"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

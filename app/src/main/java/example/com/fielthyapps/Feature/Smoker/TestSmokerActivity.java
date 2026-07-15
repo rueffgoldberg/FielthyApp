@@ -6,20 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import example.com.fielthyapps.Database.DatabaseHelper;
@@ -27,11 +30,11 @@ import example.com.fielthyapps.R;
 
 public class TestSmokerActivity extends AppCompatActivity {
 
-    private Button btn_submit;
-    private ImageView iV_back;
-
-    private RadioButton rb1a, rb1b, rb1c, rb1d;
-    private RadioButton rb2a, rb2b, rb2c, rb2d;
+    private Button btnSubmit;
+    private ImageView iVBack;
+    private RecyclerView rvPertanyaanSmoker;
+    private SmokerQuestionAdapter adapter;
+    private List<SmokerQuestion> questions;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore fStore;
@@ -48,21 +51,14 @@ public class TestSmokerActivity extends AppCompatActivity {
 
         formattedDate = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(new Date());
 
-        btn_submit = findViewById(R.id.btn_hasil);
-        iV_back = findViewById(R.id.iV_kembali);
+        btnSubmit = findViewById(R.id.btn_hasil);
+        iVBack = findViewById(R.id.iV_kembali);
+        rvPertanyaanSmoker = findViewById(R.id.rv_pertanyaan_smoker);
 
-        rb1a = findViewById(R.id.rb_1a);
-        rb1b = findViewById(R.id.rb_1b);
-        rb1c = findViewById(R.id.rb_1c);
-        rb1d = findViewById(R.id.rb_1d);
-
-        rb2a = findViewById(R.id.rb_2a);
-        rb2b = findViewById(R.id.rb_2b);
-        rb2c = findViewById(R.id.rb_2c);
-        rb2d = findViewById(R.id.rb_2d);
-
-        setupSingleChoice(rb1a, rb1b, rb1c, rb1d);
-        setupSingleChoice(rb2a, rb2b, rb2c, rb2d);
+        questions = getFtndQuestions();
+        adapter = new SmokerQuestionAdapter(questions);
+        rvPertanyaanSmoker.setLayoutManager(new LinearLayoutManager(this));
+        rvPertanyaanSmoker.setAdapter(adapter);
 
         firebaseAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -71,14 +67,13 @@ public class TestSmokerActivity extends AppCompatActivity {
         mLoading = new ProgressDialog(this);
         mLoading.setMessage("Please Wait..");
 
-        Intent iin = getIntent();
-        Bundle b = iin.getExtras();
-
-        if (b != null) {
-            merokok = (String) b.get("merokok");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            merokok = (String) bundle.get("merokok");
         }
 
-        iV_back.setOnClickListener(new View.OnClickListener() {
+        iVBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TestSmokerActivity.this, SmokerActivity.class);
@@ -87,7 +82,7 @@ public class TestSmokerActivity extends AppCompatActivity {
             }
         });
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 submitTest();
@@ -95,149 +90,149 @@ public class TestSmokerActivity extends AppCompatActivity {
         });
     }
 
-    private void setupSingleChoice(RadioButton... radioButtons) {
-        for (RadioButton radioButton : radioButtons) {
-            radioButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    for (RadioButton rb : radioButtons) {
-                        rb.setChecked(rb == view);
-                    }
-                }
-            });
-        }
+    private List<SmokerQuestion> getFtndQuestions() {
+        List<SmokerQuestion> ftndQuestions = new ArrayList<>();
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Berapa lama setelah bangun tidur Anda merokok pertama kali?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("<= 5 menit", 3),
+                        new SmokerQuestion.Option("6-30 menit", 2),
+                        new SmokerQuestion.Option("31-60 menit", 1),
+                        new SmokerQuestion.Option("> 60 menit", 0)
+                )));
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Apakah Anda merasa sulit menahan diri untuk tidak merokok di tempat yang dilarang?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("Ya", 1),
+                        new SmokerQuestion.Option("Tidak", 0)
+                )));
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Rokok mana yang paling sulit untuk tidak dihisap?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("Rokok pertama setelah bangun tidur", 1),
+                        new SmokerQuestion.Option("Rokok lainnya", 0)
+                )));
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Berapa batang rokok yang Anda hisap setiap hari?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("<= 10 batang", 0),
+                        new SmokerQuestion.Option("11-20 batang", 1),
+                        new SmokerQuestion.Option("21-30 batang", 2),
+                        new SmokerQuestion.Option(">= 31 batang", 3)
+                )));
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Apakah Anda lebih sering merokok pada jam pertama setelah bangun tidur dibandingkan waktu lainnya?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("Ya", 1),
+                        new SmokerQuestion.Option("Tidak", 0)
+                )));
+
+        ftndQuestions.add(new SmokerQuestion(
+                "Apakah Anda tetap merokok ketika sedang sakit hingga harus berbaring di tempat tidur hampir sepanjang hari?",
+                Arrays.asList(
+                        new SmokerQuestion.Option("Ya", 1),
+                        new SmokerQuestion.Option("Tidak", 0)
+                )));
+
+        return ftndQuestions;
     }
 
     private void submitTest() {
-            String jawaban1 = getJawabanPertanyaan1();
-            String jawaban2 = getJawabanPertanyaan2();
+        int unansweredQuestion = getUnansweredQuestionNumber();
+        if (unansweredQuestion != -1) {
+            Toast.makeText(this, "Pilih jawaban pertanyaan " + unansweredQuestion + " terlebih dahulu", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-            if (jawaban1.isEmpty()) {
-                Toast.makeText(this, "Pilih jawaban pertanyaan 1 terlebih dahulu", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (jawaban2.isEmpty()) {
-                Toast.makeText(this, "Pilih jawaban pertanyaan 2 terlebih dahulu", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (currentUser == null) {
-                Toast.makeText(this, "User belum login", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-        String statusPerokok = getStatusPerokok(jawaban1, jawaban2);
+        if (currentUser == null) {
+            Toast.makeText(this, "User belum login", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         mLoading.show();
 
         DocumentReference documentReference = fStore.collection("smoker").document();
         String uid = currentUser.getUid();
-
-        int poin1 = getPoinPertanyaan1();
-        int poin2 = getPoinPertanyaan2();
-        int totalPoin = poin1 + poin2;
+        int totalScore = getTotalScore();
+        String statusPerokok = getStatusPerokok(totalScore);
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("uid", uid);
         hashMap.put("id", documentReference.getId());
         hashMap.put("merokok", merokok);
-        hashMap.put("jawaban_pertanyaan_1", jawaban1);
-        hashMap.put("jawaban_pertanyaan_2", jawaban2);
-        hashMap.put("poin_pertanyaan_1", poin1);
-        hashMap.put("poin_pertanyaan_2", poin2);
-        hashMap.put("total_poin", totalPoin);
+        hashMap.put("total_poin", totalScore);
         hashMap.put("status_perokok", statusPerokok);
         hashMap.put("date", formattedDate);
+
+        for (int i = 0; i < questions.size(); i++) {
+            SmokerQuestion question = questions.get(i);
+            SmokerQuestion.Option selectedOption = question.getSelectedOption();
+            int questionNumber = i + 1;
+
+            hashMap.put("pertanyaan_" + questionNumber, question.getQuestion());
+            hashMap.put("jawaban_pertanyaan_" + questionNumber, selectedOption.getText());
+            hashMap.put("poin_pertanyaan_" + questionNumber, selectedOption.getScore());
+        }
 
         DatabaseHelper dbHelper = new DatabaseHelper(TestSmokerActivity.this);
         dbHelper.insertOrUpdateRecord(DatabaseHelper.TABLE_SMOKER, documentReference.getId(), hashMap);
 
-        // Simpan ke Firestore tanpa memblokir navigasi
         documentReference.set(hashMap);
 
         mLoading.dismiss();
 
-        Toast.makeText(TestSmokerActivity.this,
-                "Berhasil input data Smoker",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(TestSmokerActivity.this, "Berhasil input data Smoker", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(TestSmokerActivity.this, HasilSmokerActivity.class);
-        intent.putExtra("id", documentReference.getId());
-        intent.putExtra("uid", uid);
-        intent.putExtra("jawaban_pertanyaan_1", jawaban1);
-        intent.putExtra("jawaban_pertanyaan_2", jawaban2);
-        intent.putExtra("poin_pertanyaan_1", poin1);
-        intent.putExtra("poin_pertanyaan_2", poin2);
-        intent.putExtra("total_poin", totalPoin);
-        intent.putExtra("status_perokok", statusPerokok);
-        intent.putExtra("status", "testsmoker");
+        Intent resultIntent = new Intent(TestSmokerActivity.this, HasilSmokerActivity.class);
+        resultIntent.putExtra("id", documentReference.getId());
+        resultIntent.putExtra("uid", uid);
+        resultIntent.putExtra("total_poin", totalScore);
+        resultIntent.putExtra("status_perokok", statusPerokok);
+        resultIntent.putExtra("status", "testsmoker");
 
-        startActivity(intent);
+        for (int i = 0; i < questions.size(); i++) {
+            SmokerQuestion.Option selectedOption = questions.get(i).getSelectedOption();
+            int questionNumber = i + 1;
+            resultIntent.putExtra("jawaban_pertanyaan_" + questionNumber, selectedOption.getText());
+            resultIntent.putExtra("poin_pertanyaan_" + questionNumber, selectedOption.getScore());
+        }
+
+        startActivity(resultIntent);
         finish();
     }
 
-    private String getJawabanPertanyaan1() {
-        if (rb1a.isChecked()) return "A";
-        if (rb1b.isChecked()) return "B";
-        if (rb1c.isChecked()) return "C";
-        if (rb1d.isChecked()) return "D";
-        return "";
-    }
-
-    private String getJawabanPertanyaan2() {
-        if (rb2a.isChecked()) return "A";
-        if (rb2b.isChecked()) return "B";
-        if (rb2c.isChecked()) return "C";
-        if (rb2d.isChecked()) return "D";
-        return "";
-    }
-
-    private int getPoinPertanyaan1() {
-        if (rb1a.isChecked()) return 3;
-        if (rb1b.isChecked()) return 2;
-        if (rb1c.isChecked()) return 1;
-        if (rb1d.isChecked()) return 0;
+    private int getUnansweredQuestionNumber() {
+        for (int i = 0; i < questions.size(); i++) {
+            if (!questions.get(i).isAnswered()) {
+                return i + 1;
+            }
+        }
         return -1;
     }
 
-    private int getPoinPertanyaan2() {
-        if (rb2a.isChecked()) return 0;
-        if (rb2b.isChecked()) return 1;
-        if (rb2c.isChecked()) return 2;
-        if (rb2d.isChecked()) return 3;
-        return -1;
+    private int getTotalScore() {
+        int totalScore = 0;
+        for (SmokerQuestion question : questions) {
+            SmokerQuestion.Option selectedOption = question.getSelectedOption();
+            if (selectedOption != null) {
+                totalScore += selectedOption.getScore();
+            }
+        }
+        return totalScore;
     }
 
-    private String getStatusPerokok(String jawaban1, String jawaban2) {
-        String kombinasi = jawaban1 + jawaban2;
-
-        switch (kombinasi) {
-            case "AA":
-            case "AB":
-            case "AC":
-            case "AD":
-            case "BA":
-            case "BB":
-            case "BC":
-            case "BD":
-            case "CC":
-            case "CD":
-            case "DC":
-            case "DD":
-                return "perokok berat";
-
-            case "CA":
-            case "CB":
-            case "DB":
-                return "perokok sedang";
-
-            case "DA":
-                return "perokok ringan";
-
-            default:
-                return "";
+    private String getStatusPerokok(int totalScore) {
+        if (totalScore <= 3) {
+            return "perokok ringan";
+        } else if (totalScore <= 6) {
+            return "perokok sedang";
+        } else {
+            return "perokok berat";
         }
     }
 }
-

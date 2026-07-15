@@ -19,8 +19,8 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "fielthyapps.db";
-    // VERSI NAIK KE 18 UNTUK MENGHAPUS SISA TABEL TKPI YANG BIKIN CRASH
-    private static final int DATABASE_VERSION = 18;
+    // VERSI 19 UNTUK MENAMBAHKAN KOLOM FTND 6 PERTANYAAN PADA TABEL SMOKER
+    private static final int DATABASE_VERSION = 19;
 
     // Table Names
     public static final String TABLE_USER = "users";
@@ -88,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_REST = "CREATE TABLE " + TABLE_REST + "(id TEXT PRIMARY KEY, uid TEXT, date TEXT, day TEXT, timesleep TEXT, start_sleep TEXT, end_sleep TEXT, start_timestamp TEXT, end_timestamp TEXT)";
         db.execSQL(CREATE_REST);
 
-        String CREATE_SMOKER = "CREATE TABLE " + TABLE_SMOKER + "(id TEXT PRIMARY KEY, uid TEXT, date TEXT, merokok TEXT, jawaban_pertanyaan_1 TEXT, jawaban_pertanyaan_2 TEXT, poin_pertanyaan_1 TEXT, poin_pertanyaan_2 TEXT, total_poin TEXT, status_perokok TEXT)";
+        String CREATE_SMOKER = "CREATE TABLE " + TABLE_SMOKER + "(id TEXT PRIMARY KEY, uid TEXT, date TEXT, merokok TEXT, pertanyaan_1 TEXT, pertanyaan_2 TEXT, pertanyaan_3 TEXT, pertanyaan_4 TEXT, pertanyaan_5 TEXT, pertanyaan_6 TEXT, jawaban_pertanyaan_1 TEXT, jawaban_pertanyaan_2 TEXT, jawaban_pertanyaan_3 TEXT, jawaban_pertanyaan_4 TEXT, jawaban_pertanyaan_5 TEXT, jawaban_pertanyaan_6 TEXT, poin_pertanyaan_1 TEXT, poin_pertanyaan_2 TEXT, poin_pertanyaan_3 TEXT, poin_pertanyaan_4 TEXT, poin_pertanyaan_5 TEXT, poin_pertanyaan_6 TEXT, total_poin TEXT, status_perokok TEXT)";
         db.execSQL(CREATE_SMOKER);
 
         String CREATE_KALKULATOR = "CREATE TABLE " + TABLE_KALK_MEROKOK + "(id TEXT PRIMARY KEY, uid TEXT, date TEXT, batang_hari TEXT, batang_bulan TEXT, batang_tahun TEXT, total_batang TEXT, biaya_hari TEXT, biaya_bulan TEXT, biaya_tahun TEXT, total_biaya TEXT, lama_merokok TEXT)";
@@ -114,6 +114,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < 19) {
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_1", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_2", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_3", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_4", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_5", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "pertanyaan_6", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "jawaban_pertanyaan_3", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "jawaban_pertanyaan_4", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "jawaban_pertanyaan_5", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "jawaban_pertanyaan_6", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "poin_pertanyaan_3", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "poin_pertanyaan_4", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "poin_pertanyaan_5", "TEXT");
+            addColumnIfNotExists(db, TABLE_SMOKER, "poin_pertanyaan_6", "TEXT");
+        }
+
         // Hapus sisa tabel yang tidak terpakai
         if (oldVersion < 18) {
             db.execSQL("DROP TABLE IF EXISTS pangan_tkpi"); // HANCURKAN TKPI
@@ -301,8 +318,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id", id);
+        List<String> columns = getTableColumns(db, table);
         for (String key : data.keySet()) {
-            if(!key.equals("id")) {
+            if(!key.equals("id") && columns.contains(key)) {
                 try {
                     values.put(key, String.valueOf(data.get(key)));
                 } catch(Exception e){}
@@ -313,6 +331,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try { db.insert(table, null, values); } catch (Exception e) { e.printStackTrace(); }
         }
         db.close();
+    }
+
+    private void addColumnIfNotExists(SQLiteDatabase db, String table, String column, String type) {
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("PRAGMA table_info(" + table + ")", null);
+            while (cursor.moveToNext()) {
+                String existingColumn = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                if (column.equals(existingColumn)) {
+                    return;
+                }
+            }
+            db.execSQL("ALTER TABLE " + table + " ADD COLUMN " + column + " " + type);
+        } catch (Exception ignored) {
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    private List<String> getTableColumns(SQLiteDatabase db, String table) {
+        List<String> columns = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("PRAGMA table_info(" + table + ")", null);
+            while (cursor.moveToNext()) {
+                columns.add(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            }
+        } catch (Exception ignored) {
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return columns;
     }
 
     public List<HashMap<String, String>> getAllRecords(String table, String uid) {

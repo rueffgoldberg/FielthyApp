@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:padding="12dp">
 
-    <!--Card pertanyaan-->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -15,11 +14,10 @@
         android:background="@drawable/bg_white_stroke_blue"
         android:orientation="vertical"
         android:padding="18dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--Nomor Pertanyaan-->
         <TextView
             android:id="@+id/tV_quest_number"
             android:layout_width="wrap_content"
@@ -27,29 +25,27 @@
             android:fontFamily="@font/poppins_bold"
             android:text="PERTANYAAN 1"
             android:textColor="@color/tab"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
-        <!--Isi Pertanyaan-->
         <TextView
             android:id="@+id/tV_quest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Saya mudah kesal akibat hal-hal kecil"
+            android:lineSpacingExtra="3dp"
+            android:text="Pertanyaan"
             android:textColor="@color/always_black"
-            android:textSize="18sp"
-            android:lineSpacingExtra="3dp"/>
+            android:textSize="18sp" />
 
-        <!--Pilihan Jawaban-->
         <LinearLayout
             android:id="@+id/rG_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
             android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginBottom="10dp"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
