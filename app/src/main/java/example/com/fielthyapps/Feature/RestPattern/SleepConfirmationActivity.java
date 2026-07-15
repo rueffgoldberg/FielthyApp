@@ -1,14 +1,20 @@
 package example.com.fielthyapps.Feature.RestPattern;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,20 +40,30 @@ public class SleepConfirmationActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private FirebaseUser currentUser;
 
-    // Pembuatan Jalur Belakang (Background Thread) untuk kelancaran UI
+    private boolean isDecisionMade = false;
+    private static final String CONFIRM_CHANNEL_ID = "confirm_channel_high";
+    private static final int CONFIRM_NOTIFICATION_ID = 4;
+
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sleep_confirmation);
 
-        // 1. PEMBUNUH NOTIFIKASI OTOMATIS
-        // Langsung hapus notifikasi dari laci sistem saat layar Pop-up ini muncul
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager != null) {
-            manager.cancel(4); // 4 adalah CONFIRM_NOTIFICATION_ID dari Service
+        // --- KODE PENDOBRAK LAYAR (WAJIB ADA AGAR BISA MUNCUL OTOMATIS) ---
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+        } else {
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+            );
         }
+        // -----------------------------------------------------------------
+
+        setContentView(R.layout.activity_sleep_confirmation);
 
         tvQuestion = findViewById(R.id.tv_sleep_question);
         tvDuration = findViewById(R.id.tv_sleep_duration);
@@ -61,21 +77,24 @@ public class SleepConfirmationActivity extends AppCompatActivity {
         startTime = getIntent().getLongExtra("start_time", 0);
         endTime = getIntent().getLongExtra("end_time", 0);
 
-        // Menambahkan detik pada tampilan durasi di aktivitas konfirmasi
         long hours = TimeUnit.MILLISECONDS.toHours(durationMillis);
         long minutes = TimeUnit.MILLISECONDS.toMinutes(durationMillis) % 60;
         long seconds = TimeUnit.MILLISECONDS.toSeconds(durationMillis) % 60;
         String durationStr = String.format(Locale.getDefault(), "%d jam %d menit %d detik", hours, minutes, seconds);
         tvDuration.setText("Durasi: " + durationStr);
 
+        // Hapus notifikasi di laci jika Activity ini sudah muncul/terbuka
+        hapusNotifikasiPengingat();
+
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Kunci tombol agar tidak bisa ditekan 2 kali (mencegah data ganda)
+                isDecisionMade = true;
                 btnYes.setEnabled(false);
                 btnNo.setEnabled(false);
                 Toast.makeText(SleepConfirmationActivity.this, "Menyimpan data istirahat...", Toast.LENGTH_SHORT).show();
 
+                hapusNotifikasiPengingat();
                 saveSleepData();
             }
         });
@@ -83,14 +102,59 @@ public class SleepConfirmationActivity extends AppCompatActivity {
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Kunci tombol saat ditekan
+                isDecisionMade = true;
                 btnYes.setEnabled(false);
                 btnNo.setEnabled(false);
-
                 Toast.makeText(SleepConfirmationActivity.this, "Data diabaikan.", Toast.LENGTH_SHORT).show();
+
+                hapusNotifikasiPengingat();
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Jika pengguna keluar (Home/Back) tanpa menekan YA/TIDAK, munculkan reminder di laci notifikasi
+        if (!isDecisionMade && !isFinishing()) {
+            tampilkanNotifikasiPengingat();
+        }
+    }
+
+    private void tampilkanNotifikasiPengingat() {
+        Intent intent = new Intent(this, SleepConfirmationActivity.class);
+        intent.putExtra("duration", durationMillis);
+        intent.putExtra("start_time", startTime);
+        intent.putExtra("end_time", endTime);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CONFIRM_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_rest)
+                .setContentTitle("Konfirmasi Bangun")
+                .setContentText("Klik untuk mengonfirmasi waktu istirahat Anda.")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel channel = new NotificationChannel(CONFIRM_CHANNEL_ID, "Konfirmasi Bangun", NotificationManager.IMPORTANCE_HIGH);
+                manager.createNotificationChannel(channel);
+            }
+            manager.notify(CONFIRM_NOTIFICATION_ID, builder.build());
+        }
+    }
+
+    private void hapusNotifikasiPengingat() {
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            manager.cancel(CONFIRM_NOTIFICATION_ID);
+        }
     }
 
     private void saveSleepData() {
@@ -122,22 +186,24 @@ public class SleepConfirmationActivity extends AppCompatActivity {
         map.put("end_sleep", sdfJam.format(new Date(endTime)));
         map.put("start_timestamp", startTime);
         map.put("end_timestamp", endTime);
-        map.put("timestamp", startTime); // Digunakan untuk sorting
+        map.put("timestamp", startTime);
 
         HashMap<String, Object> localMap = new HashMap<>(map);
         localMap.remove("timestamp");
 
-        // 2. MELEMPAR PROSES DATABASE KE JALUR BELAKANG
         executor.execute(() -> {
-            // Simpan ke SQLite di jalur belakang (agar UI tidak freeze/ngelag)
             new DatabaseHelper(SleepConfirmationActivity.this).insertOrUpdateRecord(DatabaseHelper.TABLE_REST, docRef.getId(), localMap);
 
-            // Simpan ke Firestore tanpa memblokir navigasi
-            docRef.set(map);
-
-            runOnUiThread(() -> {
-                Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
-                finish();
+            docRef.set(map).addOnSuccessListener(aVoid -> {
+                runOnUiThread(() -> {
+                    Toast.makeText(SleepConfirmationActivity.this, "Data istirahat disimpan!", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            }).addOnFailureListener(e -> {
+                runOnUiThread(() -> {
+                    Toast.makeText(SleepConfirmationActivity.this, "Gagal sinkron cloud, data aman di lokal.", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
             });
         });
     }
