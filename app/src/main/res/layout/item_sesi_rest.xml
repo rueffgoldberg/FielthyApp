@@ -21,9 +21,20 @@
             android:fontFamily="@font/poppins_bold"/>
 
         <TextView
+            android:id="@+id/tvTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="23/06/2026"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:fontFamily="@font/poppins_med"/>
+
+        <TextView
             android:id="@+id/tvJam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:text="22:30 - 06:45"
             android:textColor="#777777"
             android:textSize="11sp"/>
@@ -33,8 +44,9 @@
         android:id="@+id/tvDurasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:text="8 jam 15 menit"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:fontFamily="@font/poppins_bold"/>
-</LinearLayout>
+</LinearLayout>

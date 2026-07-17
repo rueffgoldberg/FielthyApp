@@ -491,4 +491,61 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return true;
     }
+
+    /**
+     * Menghapus satu record dari tabel berdasarkan ID-nya.
+     *
+     * @param table nama tabel SQLite
+     * @param id    nilai kolom 'id' dari record yang ingin dihapus
+     * @return true jika berhasil menghapus setidaknya 1 baris
+     */
+    public boolean deleteRecord(String table, String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(table, "id = ?", new String[]{id});
+        db.close();
+        return rows > 0;
+    }
+
+    /**
+     * Menghapus semua record di TABLE_REST yang usianya melebihi batas hari yang ditentukan.
+     * Menggunakan kolom 'start_timestamp' (milidetik) untuk menghitung usia data.
+     *
+     * @param maxAgeMillis batas usia data dalam milidetik (mis. 7 * 24 * 60 * 60 * 1000L untuk 7 hari)
+     * @return list ID dari record yang berhasil dihapus (untuk dipakai menghapus dari Firestore)
+     */
+    public List<String> deleteOldRestPatterns(long maxAgeMillis) {
+        List<String> deletedIds = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        long cutoffTimestamp = System.currentTimeMillis() - maxAgeMillis;
+        Cursor cursor = null;
+        try {
+            // Cari semua record yang timestamp-nya lebih lama dari cutoff
+            cursor = db.rawQuery(
+                    "SELECT id FROM " + TABLE_REST + " WHERE CAST(start_timestamp AS INTEGER) > 0 AND CAST(start_timestamp AS INTEGER) < ?",
+                    new String[]{String.valueOf(cutoffTimestamp)}
+            );
+            while (cursor.moveToNext()) {
+                String id = cursor.getString(0);
+                if (id != null && !id.isEmpty()) {
+                    deletedIds.add(id);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DatabaseHelper", "deleteOldRestPatterns error", e);
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+
+        // Hapus dari SQLite setelah ID terkumpul
+        for (String id : deletedIds) {
+            try {
+                db.delete(TABLE_REST, "id = ?", new String[]{id});
+            } catch (Exception e) {
+                Log.e("DatabaseHelper", "Failed to delete rest record: " + id, e);
+            }
+        }
+
+        db.close();
+        return deletedIds;
+    }
 }

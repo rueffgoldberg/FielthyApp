@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import example.com.fielthyapps.R;
 
-public class MakananSehatActivity extends AppCompatActivity {
+public class  MakananSehatActivity extends AppCompatActivity {
     private ImageView iV_kembali;
     private String id;
     @Override

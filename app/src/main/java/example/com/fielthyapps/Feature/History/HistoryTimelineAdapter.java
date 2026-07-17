@@ -1,5 +1,6 @@
 package example.com.fielthyapps.Feature.History;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -36,14 +37,30 @@ import example.com.fielthyapps.R;
 public class HistoryTimelineAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    /**
+     * Callback yang dipanggil saat user menekan Hapus pada Long Press dialog.
+     * HistoryActivity mengimplementasikan interface ini untuk mengeksekusi
+     * penghapusan dari SQLite lokal dan Firebase.
+     */
+    public interface OnItemDeleteListener {
+        void onDeleteConfirmed(HistoryTimelineItem item);
+    }
+
     // ─── Master list (tidak berubah, dipakai untuk filter) ───────────────────
     private final List<HistoryTimelineItem> masterList;
     // ─── Displayed list (bisa berubah sesuai filter/search) ──────────────────
     private List<HistoryTimelineItem> displayList;
 
+    private OnItemDeleteListener deleteListener;
+
     public HistoryTimelineAdapter(List<HistoryTimelineItem> masterList) {
         this.masterList  = masterList;
         this.displayList = new ArrayList<>(masterList);
+    }
+
+    /** Daftarkan listener penghapusan dari Activity. */
+    public void setOnItemDeleteListener(OnItemDeleteListener listener) {
+        this.deleteListener = listener;
     }
 
     // ─────────────────────────── ViewHolders ─────────────────────────────────
@@ -123,6 +140,21 @@ public class HistoryTimelineAdapter
 
             // Whole row is clickable → navigate to detail screen
             vh.itemView.setOnClickListener(v -> navigateToDetail(v.getContext(), item));
+
+            // Long press → tampilkan dialog konfirmasi hapus
+            vh.itemView.setOnLongClickListener(v -> {
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Hapus Riwayat")
+                        .setMessage("Apakah Anda yakin ingin menghapus riwayat \"" + item.getCategoryDisplay() + "\" ini secara permanen?")
+                        .setPositiveButton("Hapus", (dialog, which) -> {
+                            if (deleteListener != null) {
+                                deleteListener.onDeleteConfirmed(item);
+                            }
+                        })
+                        .setNegativeButton("Batal", null)
+                        .show();
+                return true; // consumed — jangan trigger onClick
+            });
         }
     }
 
@@ -134,10 +166,8 @@ public class HistoryTimelineAdapter
     // ─────────────────────────── Filtering ───────────────────────────────────
 
     /**
-     * Filter tampilan berdasarkan kategori dan/atau query teks.
+     * Perbarui tampilan list dengan list yang sudah digroupkan ulang oleh HistoryActivity.
      *
-     * @param categoryKey kunci kategori (null / "" = semua kategori)
-     * @param searchQuery teks pencarian (null / "" = tidak ada filter teks)
      * @param rebuiltList list yang sudah digroupkan ulang oleh HistoryActivity
      */
     public void updateDisplay(List<HistoryTimelineItem> rebuiltList) {

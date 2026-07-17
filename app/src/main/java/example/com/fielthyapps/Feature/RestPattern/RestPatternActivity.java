@@ -793,6 +793,14 @@ public class RestPatternActivity extends AppCompatActivity {
                         firebaseUser.getUid()
                 );
 
+        // Urutkan dari sesi paling lama ke paling baru berdasarkan start_timestamp
+        java.util.Collections.sort(data, (a, b) -> {
+            long tsA = 0, tsB = 0;
+            try { tsA = Long.parseLong(a.get("start_timestamp")); } catch (Exception ignored) {}
+            try { tsB = Long.parseLong(b.get("start_timestamp")); } catch (Exception ignored) {}
+            return Long.compare(tsA, tsB);
+        });
+
         TextView tvTanggal =
                 view.findViewById(R.id.tV_tanggal_sesi);
 
@@ -806,62 +814,102 @@ public class RestPatternActivity extends AppCompatActivity {
                         R.id.tV_total_sesi_bottomsheet
                 );
 
-        for (int i = data.size() - 1; i >= 0; i--) {
+        // ── Kelompokkan sesi berdasarkan hari (dd/MM/yyyy) ───────────────────────
+        java.util.LinkedHashMap<String, java.util.List<HashMap<String, String>>> groupedByDay
+                = new java.util.LinkedHashMap<>();
 
-            HashMap<String, String> item =
-                    data.get(i);
+        for (HashMap<String, String> item : data) {
+            String fullDate = item.get("date");
+            String dateKey  = (fullDate != null && fullDate.length() >= 10)
+                    ? fullDate.substring(0, 10)
+                    : (fullDate != null ? fullDate : "-");
 
-            View sesiView =
-                    getLayoutInflater().inflate(
-                            R.layout.item_sesi_rest,
-                            container,
-                            false
-                    );
-
-            TextView tvTitle =
-                    sesiView.findViewById(
-                            R.id.tvTitle
-                    );
-
-            TextView tvJam =
-                    sesiView.findViewById(
-                            R.id.tvJam
-                    );
-
-            TextView tvDurasi =
-                    sesiView.findViewById(
-                            R.id.tvDurasi
-                    );
-
-            tvTitle.setText(
-                    "Sesi " + (data.size() - i)
-            );
-
-            String startSleep =
-                    item.get("start_sleep");
-
-            String endSleep =
-                    item.get("end_sleep");
-
-            if (startSleep == null) startSleep = "-";
-            if (endSleep == null) endSleep = "-";
-
-            tvJam.setText(
-                    startSleep + " - " + endSleep
-            );
-
-            tvDurasi.setText(
-                    item.get("timesleep")
-            );
-
-            container.addView(
-                    sesiView
-            );
+            if (!groupedByDay.containsKey(dateKey)) {
+                groupedByDay.put(dateKey, new java.util.ArrayList<>());
+            }
+            groupedByDay.get(dateKey).add(item);
         }
 
-        tvTotalSesi.setText(
-                data.size() + " sesi"
-        );
+        // ── Render: header hari → sesi-sesi di hari itu ─────────────────────────
+        float density = getResources().getDisplayMetrics().density;
+
+        for (java.util.Map.Entry<String, java.util.List<HashMap<String, String>>> entry
+                : groupedByDay.entrySet()) {
+
+            String dateKey = entry.getKey();
+            java.util.List<HashMap<String, String>> daySessions = entry.getValue();
+
+            // Ambil nama hari dari sesi pertama di grup ini
+            String dayName = daySessions.get(0).get("day");
+            if (dayName == null) dayName = "";
+
+            // ── Header hari ──────────────────────────────────────────────────────
+            TextView tvHeader = new TextView(this);
+            tvHeader.setText(dayName + ", " + dateKey);
+            tvHeader.setTextSize(12f);
+            tvHeader.setTypeface(null, android.graphics.Typeface.BOLD);
+            tvHeader.setTextColor(getColor(R.color.tab)); // warna aksen app
+            int padH = (int)(16 * density);
+            int padT = (int)(14 * density);
+            int padB = (int)(4  * density);
+            tvHeader.setPadding(padH, padT, padH, padB);
+            container.addView(tvHeader);
+
+            // ── Divider tipis di bawah header ────────────────────────────────────
+            View divider = new View(this);
+            divider.setBackgroundColor(0xFFE0E0E0);
+            LinearLayout.LayoutParams divParams =
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            (int)(0.8f * density));
+            int divMarginH = (int)(16 * density);
+            divParams.setMargins(divMarginH, 0, divMarginH, (int)(6 * density));
+            divider.setLayoutParams(divParams);
+            container.addView(divider);
+
+            // ── Sesi-sesi dalam hari ini (nomor mulai 1 lagi tiap hari) ─────────
+            for (int j = 0; j < daySessions.size(); j++) {
+                HashMap<String, String> item = daySessions.get(j);
+
+                View sesiView = getLayoutInflater().inflate(
+                        R.layout.item_sesi_rest, container, false);
+
+                TextView tvTitle      = sesiView.findViewById(R.id.tvTitle);
+                TextView tvTanggalSesi = sesiView.findViewById(R.id.tvTanggal);
+                TextView tvJam        = sesiView.findViewById(R.id.tvJam);
+                TextView tvDurasi     = sesiView.findViewById(R.id.tvDurasi);
+
+                // Nomor sesi mulai dari 1 per hari
+                tvTitle.setText("Sesi " + (j + 1));
+
+                // Sembunyikan tvTanggal karena sudah ada di header hari
+                tvTanggalSesi.setVisibility(android.view.View.GONE);
+
+                // Jam mulai - selesai
+                String startSleep = item.get("start_sleep");
+                String endSleep   = item.get("end_sleep");
+
+                boolean adaJam = startSleep != null && !startSleep.isEmpty()
+                        && !startSleep.equals("-")
+                        && endSleep != null && !endSleep.isEmpty()
+                        && !endSleep.equals("-");
+
+                if (adaJam) {
+                    tvJam.setText(startSleep + " - " + endSleep);
+                    tvJam.setAlpha(1f);
+                } else {
+                    tvJam.setText("jam tidak tercatat");
+                    tvJam.setAlpha(0.45f);
+                }
+
+                tvDurasi.setText(item.get("timesleep"));
+                container.addView(sesiView);
+            }
+        }
+
+        // Total sesi keseluruhan (semua hari dalam seminggu)
+        tvTotalSesi.setText(data.size() + " sesi");
+
 
         if (!data.isEmpty()) {
 
@@ -937,48 +985,71 @@ public class RestPatternActivity extends AppCompatActivity {
                         R.id.iV_close_total_istirahat
                 );
 
-        for (int i = data.size() - 1; i >= 0; i--) {
+        // ── Kelompokkan sesi per hari (berdasarkan tanggal dd/MM/yyyy) ───────────
+        // Urutkan dari yang terlama ke terbaru berdasarkan start_timestamp
+        java.util.Collections.sort(data, (a, b) -> {
+            long tsA = 0, tsB = 0;
+            try { tsA = Long.parseLong(a.get("start_timestamp")); } catch (Exception ignored) {}
+            try { tsB = Long.parseLong(b.get("start_timestamp")); } catch (Exception ignored) {}
+            return Long.compare(tsA, tsB);
+        });
 
-            HashMap<String, String> item =
-                    data.get(i);
+        // Gunakan LinkedHashMap agar urutan masuk tetap terjaga
+        java.util.LinkedHashMap<String, Long>   dailyMinutes = new java.util.LinkedHashMap<>();
+        java.util.LinkedHashMap<String, String> dailyDay     = new java.util.LinkedHashMap<>();
 
-            View itemView =
-                    getLayoutInflater().inflate(
-                            R.layout.item_hari_istirahat,
-                            container,
-                            false
-                    );
+        // Iterasi dari yang terlama ke terbaru (sudah diurutkan)
+        for (int i = 0; i < data.size(); i++) {
+            HashMap<String, String> item = data.get(i);
 
-            TextView tvHari =
-                    itemView.findViewById(
-                            R.id.tvHari
-                    );
+            String fullDate = item.get("date");
+            // Ambil hanya bagian dd/MM/yyyy (10 karakter pertama)
+            String dateKey = (fullDate != null && fullDate.length() >= 10)
+                    ? fullDate.substring(0, 10)
+                    : (fullDate != null ? fullDate : "-");
 
-            TextView tvTanggal =
-                    itemView.findViewById(
-                            R.id.tvTanggal
-                    );
+            String dayName = item.get("day");
+            if (dayName == null) dayName = "-";
 
-            TextView tvDurasi =
-                    itemView.findViewById(
-                            R.id.tvDurasi
-                    );
+            long menit = parseMinutes(item.get("timesleep"));
 
-            tvHari.setText(
-                    item.get("day")
-            );
+            // Akumulasi menit per tanggal
+            long existing = dailyMinutes.containsKey(dateKey)
+                    ? dailyMinutes.get(dateKey) : 0L;
+            dailyMinutes.put(dateKey, existing + menit);
 
-            tvTanggal.setText(
-                    item.get("date")
-            );
+            // Simpan nama hari untuk tanggal ini (cukup sekali)
+            if (!dailyDay.containsKey(dateKey)) {
+                dailyDay.put(dateKey, dayName);
+            }
+        }
 
-            tvDurasi.setText(
-                    item.get("timesleep")
-            );
+        // ── Tampilkan per hari ────────────────────────────────────────────────────
+        for (java.util.Map.Entry<String, Long> entry : dailyMinutes.entrySet()) {
+            String dateKey  = entry.getKey();
+            long   menit    = entry.getValue();
+            long   jam      = menit / 60;
+            long   sisa     = menit % 60;
 
-            container.addView(
-                    itemView
-            );
+            View itemView = getLayoutInflater().inflate(
+                    R.layout.item_hari_istirahat, container, false);
+
+            TextView tvHari    = itemView.findViewById(R.id.tvHari);
+            TextView tvTanggal = itemView.findViewById(R.id.tvTanggal);
+            TextView tvDurasi  = itemView.findViewById(R.id.tvDurasi);
+
+            // Nama hari (Senin, Selasa, …)
+            String namaHari = dailyDay.get(dateKey);
+            if (namaHari == null) namaHari = "-";
+            tvHari.setText(namaHari);
+
+            // Tanggal (dd/MM/yyyy)
+            tvTanggal.setText(dateKey);
+
+            // Total durasi tidur hari itu
+            tvDurasi.setText(jam + " jam " + sisa + " menit");
+
+            container.addView(itemView);
         }
 
         if (btnClose != null) {

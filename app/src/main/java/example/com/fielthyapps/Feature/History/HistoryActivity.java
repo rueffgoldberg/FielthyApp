@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,12 +50,16 @@ public class HistoryActivity extends AppCompatActivity {
     private HistoryTimelineAdapter  adapter;
     private BottomNavigationView    bottomNav;
 
-    // ─── Data ─────────────────────────────────────────────────────────────────
+    // ─── Data ────────────────────────────────────────────────────────────
     private DatabaseHelper  dbHelper;
     private SessionManager  sessionManager;
     private FirestoreSyncManager syncManager;
+    private FirebaseFirestore fStore;
     /** Semua item mentah (tanpa header tanggal), dipakai ulang untuk filter */
     private List<HistoryTimelineItem> rawItems = new ArrayList<>();
+
+    // Masa simpan maksimal Rest Pattern: 7 hari dalam milidetik
+    private static final long REST_MAX_AGE_MILLIS = 7L * 24 * 60 * 60 * 1000;
 
     // ─── Filter state ─────────────────────────────────────────────────────────
     private String activeCategory = "";   // "" = semua kategori
@@ -80,6 +85,7 @@ public class HistoryActivity extends AppCompatActivity {
         dbHelper       = new DatabaseHelper(this);
         sessionManager = new SessionManager(this);
         syncManager    = new FirestoreSyncManager();
+        fStore         = FirebaseFirestore.getInstance();
 
         bindViews();
         setupBottomNav();
@@ -420,10 +426,18 @@ public class HistoryActivity extends AppCompatActivity {
                 // Buat adapter dan tampilkan
                 List<HistoryTimelineItem> grouped = buildGroupedList(rawItems);
                 adapter = new HistoryTimelineAdapter(grouped);
+
+                // Sambungkan listener hapus manual (Long Press)
+                adapter.setOnItemDeleteListener(item -> deleteItemFromAllSources(item));
+
                 rvTimeline.setAdapter(adapter);
 
                 applyFilter();
             });
+
+            // Jalankan pembersihan otomatis Rest Pattern > 7 hari di background thread ini
+            cleanupOldRestPatterns(finalUid);
+
         }).start();
     }
 
@@ -568,6 +582,99 @@ public class HistoryActivity extends AppCompatActivity {
     private String safe(HashMap<String, String> map, String key) {
         String v = map.get(key);
         return v != null ? v : "";
+    }
+
+    // ───────────────────────── Delete Logic ──────────────────────────
+
+    /**
+     * Otomatis menghapus semua data Rest Pattern yang usianya > 7 hari
+     * dari SQLite lokal dan Firebase secara bersamaan.
+     * Dipanggil di background thread setiap kali loadAllHistory() dieksekusi.
+     */
+    private void cleanupOldRestPatterns(String uid) {
+        List<String> oldIds = dbHelper.deleteOldRestPatterns(REST_MAX_AGE_MILLIS);
+        if (!oldIds.isEmpty()) {
+            android.util.Log.d("HistoryActivity",
+                    "Auto-cleanup: menghapus " + oldIds.size() + " Rest Pattern yang > 7 hari");
+            for (String id : oldIds) {
+                // Hapus juga dari Firebase/Firestore
+                fStore.collection("restpattern").document(id).delete()
+                        .addOnSuccessListener(v -> android.util.Log.d("HistoryActivity",
+                                "Firestore restpattern deleted: " + id))
+                        .addOnFailureListener(e -> android.util.Log.w("HistoryActivity",
+                                "Gagal hapus dari Firestore: " + id, e));
+            }
+        }
+    }
+
+    /**
+     * Menghapus satu item dari:
+     * 1. List rawItems (in-memory) → UI langsung diperbarui
+     * 2. SQLite lokal
+     * 3. Firebase/Firestore
+     *
+     * Dipanggil dari OnItemDeleteListener setelah user konfirmasi di AlertDialog.
+     */
+    private void deleteItemFromAllSources(HistoryTimelineItem item) {
+        String id = item.getId();
+        String firestoreCollection = getFirestoreCollection(item.getCategoryKey());
+        String sqliteTable = getSqliteTable(item.getCategoryKey());
+
+        if (id == null || id.isEmpty()) return;
+
+        // 1. Hapus dari rawItems (in-memory) dan perbarui UI
+        rawItems.remove(item);
+        applyFilter();
+
+        // 2. Hapus dari SQLite lokal (jalankan di background)
+        new Thread(() -> {
+            if (sqliteTable != null) {
+                dbHelper.deleteRecord(sqliteTable, id);
+            }
+        }).start();
+
+        // 3. Hapus dari Firebase
+        if (firestoreCollection != null) {
+            fStore.collection(firestoreCollection).document(id).delete()
+                    .addOnSuccessListener(v -> android.util.Log.d("HistoryActivity",
+                            "Item berhasil dihapus dari Firestore: " + id))
+                    .addOnFailureListener(e -> android.util.Log.w("HistoryActivity",
+                            "Gagal menghapus dari Firestore: " + id, e));
+        }
+    }
+
+    /** Memetakan categoryKey ke nama collection Firestore */
+    private String getFirestoreCollection(String categoryKey) {
+        if (categoryKey == null) return null;
+        switch (categoryKey) {
+            case HistoryTimelineItem.CAT_MEDCHECK:   return "medcheck";
+            case HistoryTimelineItem.CAT_PHYSICAL:   return "6mwt"; // shared collection physical
+            case HistoryTimelineItem.CAT_REST:        return "restpattern";
+            case HistoryTimelineItem.CAT_SMOKER:      return "smoker";
+            case HistoryTimelineItem.CAT_KALK_MEROKOK: return "kalk_merokok";
+            case HistoryTimelineItem.CAT_NUTRITION:   return "nutritiontest";
+            case HistoryTimelineItem.CAT_FOOD_RECOG:  return "foodrecognition";
+            case HistoryTimelineItem.CAT_STRESS:      return "stresstest";
+            case HistoryTimelineItem.CAT_BMR:         return "bmr";
+            default: return null;
+        }
+    }
+
+    /** Memetakan categoryKey ke nama tabel SQLite */
+    private String getSqliteTable(String categoryKey) {
+        if (categoryKey == null) return null;
+        switch (categoryKey) {
+            case HistoryTimelineItem.CAT_MEDCHECK:    return DatabaseHelper.TABLE_MEDCHECK;
+            case HistoryTimelineItem.CAT_PHYSICAL:    return DatabaseHelper.TABLE_PHYSICAL;
+            case HistoryTimelineItem.CAT_REST:         return DatabaseHelper.TABLE_REST;
+            case HistoryTimelineItem.CAT_SMOKER:       return DatabaseHelper.TABLE_SMOKER;
+            case HistoryTimelineItem.CAT_KALK_MEROKOK: return DatabaseHelper.TABLE_KALK_MEROKOK;
+            case HistoryTimelineItem.CAT_NUTRITION:    return DatabaseHelper.TABLE_NUTRITION;
+            case HistoryTimelineItem.CAT_FOOD_RECOG:   return DatabaseHelper.TABLE_FOOD_RECOG;
+            case HistoryTimelineItem.CAT_STRESS:       return DatabaseHelper.TABLE_STRESS;
+            case HistoryTimelineItem.CAT_BMR:          return DatabaseHelper.TABLE_BMR;
+            default: return null;
+        }
     }
 
     @Override
