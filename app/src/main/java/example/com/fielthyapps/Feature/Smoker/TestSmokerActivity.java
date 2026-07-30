@@ -228,11 +228,11 @@ public class TestSmokerActivity extends AppCompatActivity {
 
     private String getStatusPerokok(int totalScore) {
         if (totalScore <= 3) {
-            return "perokok ringan";
+            return "Ketergantungan Rendah";
         } else if (totalScore <= 6) {
-            return "perokok sedang";
+            return "Ketergantungan Sedang";
         } else {
-            return "perokok berat";
+            return "Ketergantungan Tinggi";
         }
     }
 }

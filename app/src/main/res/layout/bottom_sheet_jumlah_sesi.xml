@@ -134,15 +134,6 @@
                 android:textColor="@color/tab"
                 android:textSize="30sp"
                 android:fontFamily="@font/poppins_extrabold" />
-
-            <TextView
-                android:id="@+id/tV_detail_sesi_bottomsheet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Utama 4 • Pendek 6 • Mikro 2"
-                android:textColor="@color/grey"
-                android:textSize="12sp"
-                android:layout_marginTop="6dp"/>
         </LinearLayout>
 
     </LinearLayout>
